@@ -5,7 +5,7 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
-import HomeScreen from '../screens/HomeScreen/HomeScreen';
+import HomeScreen, {Vehicle} from '../screens/HomeScreen/HomeScreen';
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
 import VehicleDetailsScreen from '../screens/VehicleDetailsScreen/VehicleDetailsScreen';
@@ -16,7 +16,7 @@ type RootStackParamList = {
   Login: undefined;
   Home: undefined;
   Profile: undefined;
-  VehicleDetails: undefined;
+  VehicleDetails: {vehicle: Vehicle};
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

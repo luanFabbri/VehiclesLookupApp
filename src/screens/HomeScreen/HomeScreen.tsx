@@ -1,6 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {View, Image, StyleSheet, SafeAreaView, Alert} from 'react-native';
-import MapView, {Marker} from 'react-native-maps';
+import {
+  View,
+  Image,
+  StyleSheet,
+  SafeAreaView,
+  Alert,
+  Pressable,
+  Text,
+} from 'react-native';
+import MapView, {Marker, Callout} from 'react-native-maps';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {fetchVehicles} from '../../services/api-config';
@@ -8,7 +16,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '../../navigation';
 import styles from './HomeScreen.styles';
 
-interface Vehicle {
+export interface Vehicle {
   chassis: string;
   licensePlate: string;
   fuelLevel: number;
@@ -47,16 +55,26 @@ const HomeScreen: React.FC = () => {
     getVehicles();
   }, [token, navigation]);
 
+  const handlePressAvatar = () => {
+    navigation.navigate('Profile');
+  };
+
+  const handleMarkerPress = (vehicle: Vehicle) => {
+    navigation.navigate('VehicleDetails', {vehicle});
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Image source={require('../assets/logo.jpg')} style={styles.logo} />
-        <Image
-          source={{
-            uri: `https://ui-avatars.com/api/?name=${userName}&background=random`,
-          }}
-          style={styles.avatar}
-        />
+        <Pressable onPress={handlePressAvatar}>
+          <Image
+            source={{
+              uri: `https://ui-avatars.com/api/?name=${userName}&background=random`,
+            }}
+            style={styles.avatar}
+          />
+        </Pressable>
       </View>
       <MapView
         style={styles.map}
@@ -75,7 +93,19 @@ const HomeScreen: React.FC = () => {
             }}
             title={vehicle.model}
             description={vehicle.licensePlate}
-          />
+            onPress={() => handleMarkerPress(vehicle)} // Navega ao pressionar o marker
+          >
+            <Callout onPress={() => handleMarkerPress(vehicle)}>
+              <View>
+                <Image
+                  source={{uri: vehicle.pictureLink}}
+                  style={{width: 100, height: 100}} // Ajuste o tamanho conforme necessário
+                />
+                <Text>{vehicle.model}</Text>
+                <Text>{vehicle.licensePlate}</Text>
+              </View>
+            </Callout>
+          </Marker>
         ))}
       </MapView>
     </SafeAreaView>

@@ -6,15 +6,29 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
+    padding: 16,
   },
-  innerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
+  title: {
     fontSize: 24,
-    color: '#333',
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  profileSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  userName: {
+    fontSize: 18,
+    marginRight: 10,
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+  },
+  languagePicker: {
+    width: '100%',
   },
 });
 
