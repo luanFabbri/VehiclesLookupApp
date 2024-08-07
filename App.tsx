@@ -6,7 +6,7 @@ import 'intl-pluralrules';
 import {I18nextProvider} from 'react-i18next';
 import i18n from './src/i18n';
 import {Provider} from 'react-redux';
-import store from './src/store';
+import store from './src/redux/store';
 
 const App = () => {
   return (

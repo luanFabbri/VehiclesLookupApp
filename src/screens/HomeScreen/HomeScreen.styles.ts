@@ -4,17 +4,26 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
   },
-  innerContainer: {
-    justifyContent: 'center',
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+    backgroundColor: '#fff',
     alignItems: 'center',
   },
-  text: {
-    fontSize: 24,
-    color: '#333',
+  logo: {
+    width: 100,
+    height: 40,
+    resizeMode: 'contain',
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+  },
+  map: {
+    flex: 1,
   },
 });
 
