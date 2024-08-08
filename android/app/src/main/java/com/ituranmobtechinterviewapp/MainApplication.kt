@@ -1,43 +1,59 @@
-package com.ituranmobtechinterviewapp
+package com.iturammobinterviewapp;
 
-import android.app.Application
-import com.facebook.react.PackageList
-import com.facebook.react.ReactApplication
-import com.facebook.react.ReactHost
-import com.facebook.react.ReactNativeHost
-import com.facebook.react.ReactPackage
-import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
-import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
-import com.facebook.react.defaults.DefaultReactNativeHost
-import com.facebook.soloader.SoLoader
+import android.app.Application;
+import android.content.Context;
+import android.content.res.Resources;
+import androidx.annotation.NonNull;
+import com.facebook.react.PackageList;
+import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactNativeHost;
+import com.facebook.react.ReactPackage;
+import com.facebook.soloader.SoLoader;
+import java.util.List;
 
-class MainApplication : Application(), ReactApplication {
+public class MainApplication extends Application implements ReactApplication {
+  private final ReactNativeHost mReactNativeHost =
+      new ReactNativeHost(this) {
+        @Override
+        public boolean getUseDeveloperSupport() {
+          return BuildConfig.DEBUG;
+        }
 
-  override val reactNativeHost: ReactNativeHost =
-      object : DefaultReactNativeHost(this) {
-        override fun getPackages(): List<ReactPackage> =
-            PackageList(this).packages.apply {
-              // Packages that cannot be autolinked yet can be added manually here, for example:
-              // add(MyReactNativePackage())
-            }
+        @Override
+        protected List<ReactPackage> getPackages() {
+          @SuppressWarnings("UnnecessaryLocalVariable")
+          List<ReactPackage> packages = new PackageList(this).getPackages();
+          return packages;
+        }
 
-        override fun getJSMainModuleName(): String = "index"
+        @Override
+        protected String getJSMainModuleName() {
+          return "index";
+        }
+      };
 
-        override fun getUseDeveloperSupport(): Boolean = BuildConfig.DEBUG
+  @Override
+  public ReactNativeHost getReactNativeHost() {
+    return mReactNativeHost;
+  }
 
-        override val isNewArchEnabled: Boolean = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED
-        override val isHermesEnabled: Boolean = BuildConfig.IS_HERMES_ENABLED
-      }
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    SoLoader.init(this, /* native exopackage */ false);
 
-  override val reactHost: ReactHost
-    get() = getDefaultReactHost(applicationContext, reactNativeHost)
+    // Carregar a chave da API do Google Maps do arquivo .env
+    String mapsApiKey = BuildConfig.MAPS_API_KEY;
 
-  override fun onCreate() {
-    super.onCreate()
-    SoLoader.init(this, false)
-    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
-      // If you opted-in for the New Architecture, we load the native entry point for this app.
-      load()
+    // Substituir o placeholder no strings.xml com a chave da API
+    replaceApiKeyInStringsXml(mapsApiKey);
+  }
+
+  private void replaceApiKeyInStringsXml(@NonNull String apiKey) {
+    Resources res = getResources();
+    int resId = res.getIdentifier("google_maps_key", "string", getPackageName());
+    if (resId != 0) {
+      res.getString(resId);
     }
   }
 }

@@ -21,6 +21,7 @@
     "react": "18.2.0",
     "react-i18next": "^15.0.0",
     "react-native": "latest",
+    "react-native-config": "^1.5.3",
     "react-native-dotenv": "^3.4.11",
     "react-native-maps": "^1.17.3",
     "react-native-paper": "^5.12.5",
