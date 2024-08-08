@@ -2,6 +2,7 @@ import {useDispatch} from 'react-redux';
 import {setToken} from '../redux/slices/authSlice';
 import {Login, Profile} from '../types/loginInterfaces';
 import {Vehicle, VehicleHistory} from '../types/VehicleInterfaces';
+import {SERVER_IP} from '@env';
 
 // Função para realizar o login e retornar o id_token
 export const login = async (
@@ -14,7 +15,7 @@ export const login = async (
   console.log('email: ', values.email, ' pass: ', values.password);
 
   try {
-    const response = await fetch('http://192.168.15.8:3000/login', {
+    const response = await fetch(`http://${SERVER_IP}:3000/login`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(values),
@@ -53,7 +54,7 @@ export const login = async (
 // Função para obter o perfil do usuário
 export const getProfile = async (token: string) => {
   try {
-    const response = await fetch('http://localhost:3000/profile', {
+    const response = await fetch(`http://${SERVER_IP}:3000/profile`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -81,7 +82,7 @@ export const getProfile = async (token: string) => {
 
 export const fetchVehicles = async (token: string) => {
   try {
-    const response = await fetch('http://localhost:3000/vehicles', {
+    const response = await fetch(`http://${SERVER_IP}:3000/vehicles`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -101,7 +102,7 @@ export const fetchVehicles = async (token: string) => {
 
 export const fetchVehicleHistory = async () => {
   try {
-    const response = await fetch('http://localhost:3000/vehicles/history');
+    const response = await fetch(`http://${SERVER_IP}:3000/vehicles/history`);
     if (!response.ok) {
       throw new Error('Erro ao buscar o histórico do veículo');
     }
