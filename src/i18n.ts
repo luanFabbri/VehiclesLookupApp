@@ -5,16 +5,34 @@ const resources = {
   en: {
     translation: {
       profile: 'Profile',
+      details: 'Details',
+      history: 'History',
+      dateTime: 'Date/Time',
+      fuel: 'Fuel',
+      position: 'Position',
+      password: 'Password',
     },
   },
   es: {
     translation: {
       profile: 'Perfil',
+      details: 'Detalles',
+      history: 'Historial',
+      dateTime: 'Fecha/Hora',
+      fuel: 'Combustible',
+      position: 'Posición',
+      password: 'Contraseña',
     },
   },
   pt: {
     translation: {
       profile: 'Perfil',
+      details: 'Detalhes',
+      history: 'Histórico',
+      dateTime: 'Data/Hora',
+      fuel: 'Combustível',
+      position: 'Posição',
+      password: 'Senha',
     },
   },
 };

@@ -1,13 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Image,
-  StyleSheet,
-  SafeAreaView,
-  Alert,
-  Pressable,
-  Text,
-} from 'react-native';
+import {View, Image, SafeAreaView, Alert, Pressable, Text} from 'react-native';
 import MapView, {Marker, Callout} from 'react-native-maps';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
@@ -15,17 +7,8 @@ import {fetchVehicles} from '../../services/api-config';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '../../navigation';
 import styles from './HomeScreen.styles';
-
-export interface Vehicle {
-  chassis: string;
-  licensePlate: string;
-  fuelLevel: number;
-  odometerKm: number;
-  model: string;
-  latitude: number;
-  longitude: number;
-  pictureLink: string;
-}
+import {Vehicle} from '../../types/VehicleInterfaces';
+import UserAvatar from '../../components/userAvatar/UserAvatar';
 
 const HomeScreen: React.FC = () => {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -66,13 +49,14 @@ const HomeScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Image source={require('../assets/logo.jpg')} style={styles.logo} />
+        <Image
+          source={require('../../assets/images/logo.png')}
+          style={styles.logo}
+        />
         <Pressable onPress={handlePressAvatar}>
-          <Image
-            source={{
-              uri: `https://ui-avatars.com/api/?name=${userName}&background=random`,
-            }}
-            style={styles.avatar}
+          <UserAvatar
+            uri={`https://ui-avatars.com/api/?name=${userName}&background=random`}
+            size="small"
           />
         </Pressable>
       </View>

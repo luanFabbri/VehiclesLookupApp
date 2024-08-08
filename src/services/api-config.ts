@@ -1,21 +1,30 @@
-// src/services/api-config.ts
-import {Alert} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {setToken, setProfile} from '../redux/slices/authSlice';
+import {setToken} from '../redux/slices/authSlice';
+import {Login, Profile} from '../types/loginInterfaces';
+import {Vehicle, VehicleHistory} from '../types/VehicleInterfaces';
 
 // Função para realizar o login e retornar o id_token
-export const login = async (values: {email: string; password: string}) => {
-  const dispatch = useDispatch();
+export const login = async (
+  values: {email: string; password: string},
+  dispatch: any,
+) => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 6000);
+
+  console.log('email: ', values.email, ' pass: ', values.password);
 
   try {
-    const response = await fetch('http://localhost:3000/login', {
+    const response = await fetch('http://192.168.15.8:3000/login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(values),
+      signal: controller.signal,
     });
 
+    clearTimeout(timeoutId);
+
     if (response.status === 200) {
-      const data = await response.json();
+      const data: Login = await response.json();
       dispatch(setToken(data.id_token));
       return {status: 'success', data: data.id_token};
     } else if (response.status === 401) {
@@ -26,7 +35,14 @@ export const login = async (values: {email: string; password: string}) => {
         message: `Ops! Encontramos um problema. Tente novamente e se o erro persistir contate nosso suporte. (Erro ${response.status})`,
       };
     }
-  } catch (error) {
+  } catch (error: any) {
+    if (error.name === 'AbortError') {
+      return {
+        status: 'error',
+        message: 'A requisição demorou muito para responder. Tente novamente.',
+      };
+    }
+    console.log(error);
     return {
       status: 'error',
       message: 'Ocorreu um erro desconhecido. Tente novamente.',
@@ -46,7 +62,7 @@ export const getProfile = async (token: string) => {
     });
 
     if (response.status === 200) {
-      const data = await response.json();
+      const data: Profile = await response.json();
       return {status: 'success', data: data};
     } else {
       return {
@@ -73,12 +89,25 @@ export const fetchVehicles = async (token: string) => {
     });
 
     if (response.ok) {
-      const data = await response.json();
+      const data: Vehicle[] = await response.json();
       return data;
     } else {
       throw new Error(`Erro ao buscar veículos: ${response.status}`);
     }
   } catch (error) {
     throw new Error('Erro ao buscar veículos');
+  }
+};
+
+export const fetchVehicleHistory = async () => {
+  try {
+    const response = await fetch('http://localhost:3000/vehicles/history');
+    if (!response.ok) {
+      throw new Error('Erro ao buscar o histórico do veículo');
+    }
+    const data: VehicleHistory[] = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao buscar o histórico do veículo');
   }
 };

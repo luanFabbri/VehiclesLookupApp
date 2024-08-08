@@ -22,11 +22,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginRight: 10,
   },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
   languagePicker: {
     width: '100%',
   },

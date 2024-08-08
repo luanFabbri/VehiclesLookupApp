@@ -17,11 +17,6 @@ const styles = StyleSheet.create({
     height: 40,
     resizeMode: 'contain',
   },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
   map: {
     flex: 1,
   },

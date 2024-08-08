@@ -17,11 +17,13 @@ import styles from './LoginScreen.styles';
 import {login, getProfile} from '../../services/api-config';
 import {setProfile} from '../../redux/slices/authSlice';
 import {NavigationProps} from '../../navigation'; // Importar tipos de navegação
+import {useTranslation} from 'react-i18next';
 
 const LoginScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation<NavigationProps>(); // Usar o tipo de navegação definido
+  const {t} = useTranslation();
 
   const formik = useFormik({
     initialValues: {email: '', password: ''},
@@ -31,13 +33,13 @@ const LoginScreen: React.FC = () => {
     }),
     onSubmit: async values => {
       setLoading(true);
-      const result = await login(values);
+      const result = await login(values, dispatch);
 
-      if (result?.status === 'success') {
+      if (result?.status === 'success' && result.data) {
         console.log('Login bem-sucedido', result.data);
         const profileResult = await getProfile(result.data);
 
-        if (profileResult.status === 'success') {
+        if (profileResult.status === 'success' && profileResult.data) {
           console.log('Perfil do usuário', profileResult.data);
           dispatch(setProfile(profileResult.data));
           navigation.navigate('Home');
@@ -55,7 +57,6 @@ const LoginScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
-        <Text style={styles.text}>LoginScreen</Text>
         <TextInput
           style={styles.input}
           placeholder="E-mail"
@@ -69,7 +70,7 @@ const LoginScreen: React.FC = () => {
         ) : null}
         <TextInput
           style={styles.input}
-          placeholder="Senha"
+          placeholder={t('password')}
           secureTextEntry
           onChangeText={formik.handleChange('password')}
           onBlur={formik.handleBlur('password')}
