@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">IturanmobTechInterviewApp</string>
-    <string name="google_maps_key">YOUR_API_KEY</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyALEy73mWJPhAK_V56MwBvQPReFQ-ZrT3c</string>
 </resources>

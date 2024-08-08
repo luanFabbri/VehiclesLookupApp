@@ -75,3 +75,4 @@ yarn-error.log
 
 # Environment variables
 .env
+android/app/src/main/res/values/strings.xml

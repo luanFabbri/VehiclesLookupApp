@@ -7,17 +7,28 @@ import styles from './VehicleDetailsScreen.styles';
 import {useTranslation} from 'react-i18next';
 import {Vehicle, VehicleHistory} from '../../types/VehicleInterfaces';
 import VehicleDetail from '../../components/vehicleDetail/VehicleDetail';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../redux/store';
 
 const VehicleDetailsScreen: React.FC = () => {
   const {t} = useTranslation();
   const route = useRoute<RouteProp<{params: {vehicle: Vehicle}}, 'params'>>();
   const {vehicle} = route.params;
   const [history, setHistory] = useState<VehicleHistory[]>([]);
+  const token = useSelector((state: RootState) => state.auth.token);
 
   useEffect(() => {
     const getVehicleHistory = async () => {
+      if (!token) {
+        Alert.alert(
+          'Erro',
+          'Token de autenticação não encontrado. Por favor, faça login novamente.',
+        );
+        return;
+      }
+
       try {
-        const data = await fetchVehicleHistory();
+        const data = await fetchVehicleHistory(token);
         setHistory(data);
       } catch (error) {
         Alert.alert(
@@ -28,7 +39,7 @@ const VehicleDetailsScreen: React.FC = () => {
     };
 
     getVehicleHistory();
-  }, []);
+  }, [token, vehicle]);
 
   return (
     <View style={styles.container}>

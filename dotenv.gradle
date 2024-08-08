@@ -2,7 +2,3 @@ def getEnvVar = { name ->
     def value = project.hasProperty(name) ? project.property(name) : System.getenv(name)
     return value ?: ""
 }
-
-android.applicationVariants.all { variant ->
-    variant.buildConfigField 'String', 'MAPS_API_KEY', "\"${getEnvVar("MAPS_API_KEY")}\""
-}

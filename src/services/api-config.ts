@@ -100,14 +100,23 @@ export const fetchVehicles = async (token: string) => {
   }
 };
 
-export const fetchVehicleHistory = async () => {
+export const fetchVehicleHistory = async (token: string) => {
   try {
-    const response = await fetch(`http://${SERVER_IP}:3000/vehicles/history`);
-    if (!response.ok) {
-      throw new Error('Erro ao buscar o histórico do veículo');
+    const response = await fetch(`http://${SERVER_IP}:3000/vehicles/history`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.ok) {
+      const data: VehicleHistory[] = await response.json();
+      return data;
+    } else {
+      throw new Error(
+        `Erro ao buscar o histórico do veículo: ${response.status}`,
+      );
     }
-    const data: VehicleHistory[] = await response.json();
-    return data;
   } catch (error) {
     throw new Error('Erro ao buscar o histórico do veículo');
   }
