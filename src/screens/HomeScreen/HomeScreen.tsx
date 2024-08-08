@@ -83,7 +83,7 @@ const HomeScreen: React.FC = () => {
               <View>
                 <Image
                   source={{uri: vehicle.pictureLink}}
-                  style={{width: 100, height: 100}} // Ajuste o tamanho conforme necessário
+                  style={{width: 100, height: 100}} // Ajuste o tamanho conforme necessárioaa
                 />
                 <Text>{vehicle.model}</Text>
                 <Text>{vehicle.licensePlate}</Text>
