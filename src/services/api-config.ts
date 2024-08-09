@@ -1,7 +1,9 @@
+//TODO - Mensagens de erro precisam de tradução!
+
 import {setToken} from '../redux/slices/authSlice';
 import {Login, Profile} from '../types/loginInterfaces';
 import {Vehicle, VehicleHistory} from '../types/VehicleInterfaces';
-import {SERVER_IP} from '@env';
+import {API_URL} from '@env';
 
 // Função para realizar o login e retornar o id_token
 export const login = async (
@@ -14,7 +16,7 @@ export const login = async (
   console.log('email: ', values.email, ' pass: ', values.password);
 
   try {
-    const response = await fetch(`http://${SERVER_IP}:3000/login`, {
+    const response = await fetch(`${API_URL}/login`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(values),
@@ -54,7 +56,7 @@ export const login = async (
 // Função para obter o perfil do usuário
 export const getProfile = async (token: string) => {
   try {
-    const response = await fetch(`http://${SERVER_IP}:3000/profile`, {
+    const response = await fetch(`${API_URL}/profile`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -83,7 +85,7 @@ export const getProfile = async (token: string) => {
 // Função para obter os veículos
 export const fetchVehicles = async (token: string) => {
   try {
-    const response = await fetch(`http://${SERVER_IP}:3000/vehicles`, {
+    const response = await fetch(`${API_URL}/vehicles`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -104,7 +106,7 @@ export const fetchVehicles = async (token: string) => {
 // Função para obter o histórico dos veículos
 export const fetchVehicleHistory = async (token: string) => {
   try {
-    const response = await fetch(`http://${SERVER_IP}:3000/vehicles/history`, {
+    const response = await fetch(`${API_URL}/vehicles/history`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

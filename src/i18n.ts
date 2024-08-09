@@ -1,3 +1,5 @@
+// TODO - Fazer com que a lingua padrão dos sistema seja utilizada ao invés de deixas hardcoded
+
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 

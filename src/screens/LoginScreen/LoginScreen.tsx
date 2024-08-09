@@ -1,5 +1,6 @@
 // TODO - Adicionar visual na tela
 // TODO - Componentizar botões e inputs
+// TODO - Trocar idioma em login
 
 import React, {useState} from 'react';
 import {
