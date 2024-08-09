@@ -76,18 +76,19 @@ const HomeScreen: React.FC = () => {
               longitude: vehicle.longitude,
             }}
             title={vehicle.model}
-            description={vehicle.licensePlate}
-            onPress={() => handleMarkerPress(vehicle)} // Navega ao pressionar o marker
-          >
-            <Callout onPress={() => handleMarkerPress(vehicle)}>
-              <View>
+            description={vehicle.licensePlate}>
+            <Callout
+              onPress={() => handleMarkerPress(vehicle)}
+              style={{width: 180, height: 220}}>
+              <Text style={{height: 160, position: 'relative', bottom: 20}}>
                 <Image
+                  resizeMode="cover"
+                  style={{width: 160, height: 105}}
                   source={{uri: vehicle.pictureLink}}
-                  style={{width: 100, height: 100}} // Ajuste o tamanho conforme necessárioaa
                 />
-                <Text>{vehicle.model}</Text>
-                <Text>{vehicle.licensePlate}</Text>
-              </View>
+              </Text>
+              <Text>{vehicle.model}</Text>
+              <Text>Placa: {vehicle.licensePlate}</Text>
             </Callout>
           </Marker>
         ))}
