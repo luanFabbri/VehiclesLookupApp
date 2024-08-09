@@ -1,10 +1,8 @@
-// ProfileScreen.styles.ts
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
   },
@@ -13,17 +11,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
-  profileSection: {
+  profileData: {
+    width: '100%',
     flexDirection: 'row',
+
     alignItems: 'center',
-    marginBottom: 20,
+    justifyContent: 'space-around',
+    marginVertical: 36,
   },
   userName: {
     fontSize: 18,
+    fontWeight: 'bold',
     marginRight: 10,
   },
   languagePicker: {
-    width: '100%',
+    width: '80%',
   },
 });
 

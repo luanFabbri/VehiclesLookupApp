@@ -14,17 +14,17 @@ const UserAvatar: React.FC<UserAvatarProps> = ({uri, size}) => {
 
 const smallStyles = StyleSheet.create({
   avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
   } as ImageStyle,
 });
 
 const bigStyles = StyleSheet.create({
   avatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 120,
+    height: 120,
+    borderRadius: 60,
   } as ImageStyle,
 });
 

@@ -1,4 +1,3 @@
-// App.tsx
 import React from 'react';
 import AppNavigator from './src/navigation';
 import './src/i18n';

@@ -1,4 +1,6 @@
-// src/screens/LoginScreen.tsx
+// TODO - Adicionar visual na tela
+// TODO - Componentizar botões e inputs
+
 import React, {useState} from 'react';
 import {
   View,
@@ -12,17 +14,17 @@ import {
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
-import {useNavigation} from '@react-navigation/native';
+import {CommonActions, useNavigation} from '@react-navigation/native';
 import styles from './LoginScreen.styles';
 import {login, getProfile} from '../../services/api-config';
 import {setProfile} from '../../redux/slices/authSlice';
-import {NavigationProps} from '../../navigation'; // Importar tipos de navegação
+import {NavigationProps} from '../../navigation';
 import {useTranslation} from 'react-i18next';
 
 const LoginScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const navigation = useNavigation<NavigationProps>(); // Usar o tipo de navegação definido
+  const navigation = useNavigation<NavigationProps>();
   const {t} = useTranslation();
 
   const formik = useFormik({
@@ -42,7 +44,12 @@ const LoginScreen: React.FC = () => {
         if (profileResult.status === 'success' && profileResult.data) {
           console.log('Perfil do usuário', profileResult.data);
           dispatch(setProfile(profileResult.data));
-          navigation.navigate('Home');
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{name: 'Home'}],
+            }),
+          );
         } else {
           Alert.alert('Erro', profileResult.message);
         }

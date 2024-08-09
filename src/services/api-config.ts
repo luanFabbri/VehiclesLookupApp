@@ -1,4 +1,3 @@
-import {useDispatch} from 'react-redux';
 import {setToken} from '../redux/slices/authSlice';
 import {Login, Profile} from '../types/loginInterfaces';
 import {Vehicle, VehicleHistory} from '../types/VehicleInterfaces';
@@ -40,7 +39,8 @@ export const login = async (
     if (error.name === 'AbortError') {
       return {
         status: 'error',
-        message: 'A requisição demorou muito para responder. Tente novamente.',
+        message:
+          'A requisição demorou muito para responder. Tente novamente. (Erro 504)',
       };
     }
     console.log(error);
@@ -80,6 +80,7 @@ export const getProfile = async (token: string) => {
   }
 };
 
+// Função para obter os veículos
 export const fetchVehicles = async (token: string) => {
   try {
     const response = await fetch(`http://${SERVER_IP}:3000/vehicles`, {
@@ -100,6 +101,7 @@ export const fetchVehicles = async (token: string) => {
   }
 };
 
+// Função para obter o histórico dos veículos
 export const fetchVehicleHistory = async (token: string) => {
   try {
     const response = await fetch(`http://${SERVER_IP}:3000/vehicles/history`, {

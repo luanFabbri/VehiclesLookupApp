@@ -20,11 +20,13 @@ const VehicleDetail: React.FC<VehicleDetailProps> = ({history}) => {
 
   return (
     <View style={styles.historyItem}>
-      <Text style={styles.historyText}>{formattedDate}</Text>
-      <Text style={styles.historyText}>{fuelLevel}%</Text>
-      <Text style={styles.historyText}>{`${latitude},${longitude}`}</Text>
+      <Text style={styles.historyTextDate}>{formattedDate}</Text>
+      <Text style={styles.historyFuel}>{fuelLevel}%</Text>
+      <Text
+        style={styles.historyTextPosition}>{`${latitude},${longitude}`}</Text>
       <MaterialCommunityIcons
-        name="map-marker-radius"
+        style={{fontSize: 18, paddingLeft: 5, color: 'grey'}}
+        name="open-in-new"
         size={24}
         color="black"
         onPress={handlePressLocation}

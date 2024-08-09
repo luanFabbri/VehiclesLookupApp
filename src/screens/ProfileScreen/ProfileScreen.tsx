@@ -6,7 +6,7 @@ import {useTranslation} from 'react-i18next';
 import i18n from '../../i18n';
 import styles from './ProfileScreen.styles';
 import UserAvatar from '../../components/userAvatar/UserAvatar';
-import LanguagePicker from '../../components/buttons/picker/LanguagePicker';
+import LanguagePicker from '../../components/inputs/picker/LanguagePicker';
 
 const ProfileScreen: React.FC = () => {
   const {t} = useTranslation();
@@ -29,7 +29,7 @@ const ProfileScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{t('profile')}</Text>
-      <View style={styles.profileSection}>
+      <View style={styles.profileData}>
         <Text style={styles.userName}>{toTitleCase(userName || '')}</Text>
         <UserAvatar
           uri={`https://ui-avatars.com/api/?name=${userName}&background=random`}

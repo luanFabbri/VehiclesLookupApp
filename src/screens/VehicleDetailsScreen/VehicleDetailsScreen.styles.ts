@@ -1,4 +1,3 @@
-// VehicleDetailsScreen.styles.ts
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
@@ -20,27 +19,46 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   detailsContainer: {
+    display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     marginBottom: 16,
+    paddingBottom: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
   },
   model: {
     fontSize: 18,
     fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 8,
   },
   detailRow: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginVertical: 4,
+    width: '100%',
+  },
+  detailColumn: {
+    width: '48%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  detailIcon: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   detailText: {
-    fontSize: 16,
+    fontSize: 14,
     marginLeft: 8,
   },
   historyTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginVertical: 16,
+    marginBottom: 16,
   },
   historyList: {
     flex: 1,
@@ -50,8 +68,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 8,
     paddingBottom: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
   },
   historyHeaderText: {
     fontSize: 14,

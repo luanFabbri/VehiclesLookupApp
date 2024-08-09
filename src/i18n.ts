@@ -39,7 +39,7 @@ const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: 'pt', // idioma padrão
+  lng: 'pt',
   fallbackLng: 'en',
   interpolation: {
     escapeValue: false,

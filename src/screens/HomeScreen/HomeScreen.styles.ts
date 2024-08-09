@@ -1,4 +1,3 @@
-// HomeScreen.styles.ts
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
@@ -8,14 +7,15 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10,
+    padding: 16,
     backgroundColor: '#fff',
     alignItems: 'center',
+    paddingBottom: 20,
   },
   logo: {
-    width: 100,
-    height: 40,
+    height: 60,
     resizeMode: 'contain',
+    marginLeft: 130,
   },
   map: {
     flex: 1,
