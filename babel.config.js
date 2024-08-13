@@ -10,5 +10,20 @@ module.exports = {
         allowUndefined: true,
       },
     ],
+    [
+      'module-resolver',
+      {
+        root: ['./src'],
+        alias: {
+          '@redux': './src/redux',
+          '@services': './src/services',
+          '@api': './src/services/API',
+          '@i18n': './src/services/i18n',
+          '@navigation': './src/navigation',
+          '@interfaces': './src/interfaces',
+          '@components': './src/components',
+        },
+      },
+    ],
   ],
 };

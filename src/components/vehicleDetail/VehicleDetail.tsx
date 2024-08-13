@@ -3,7 +3,7 @@ import {View, Text, Linking} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {format} from 'date-fns';
 import styles from './VehicleDetail.styles.ts';
-import {VehicleHistory} from '../../types/VehicleInterfaces';
+import {VehicleHistory} from '../../interfaces/VehicleInterfaces.ts';
 
 interface VehicleDetailProps {
   history: VehicleHistory;

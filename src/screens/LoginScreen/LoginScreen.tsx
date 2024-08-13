@@ -16,11 +16,13 @@ import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
 import {CommonActions, useNavigation} from '@react-navigation/native';
-import styles from './LoginScreen.styles';
-import {login, getProfile} from '../../services/api-config';
-import {setProfile} from '../../redux/slices/authSlice';
-import {NavigationProps} from '../../navigation';
 import {useTranslation} from 'react-i18next';
+
+// Importando módulos da aplicação usando aliases
+import styles from './LoginScreen.styles';
+import {login, getProfile} from '@api/api-config';
+import {setProfile} from '@redux/slices/authSlice';
+import {NavigationProps} from '@navigation/index';
 
 const LoginScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);

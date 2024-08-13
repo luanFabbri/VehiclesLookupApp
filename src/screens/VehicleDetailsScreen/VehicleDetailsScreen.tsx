@@ -4,14 +4,16 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, Image, FlatList, Alert} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {fetchVehicleHistory} from '../../services/api-config';
-import styles from './VehicleDetailsScreen.styles';
-import {useTranslation} from 'react-i18next';
-import {Vehicle, VehicleHistory} from '../../types/VehicleInterfaces';
-import VehicleDetail from '../../components/vehicleDetail/VehicleDetail';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store';
-import {NavigationProps} from '../../navigation';
+import {useTranslation} from 'react-i18next';
+
+// Importando módulos da aplicação usando aliases
+import {fetchVehicleHistory} from '@api/api-config';
+import styles from './VehicleDetailsScreen.styles';
+import {Vehicle, VehicleHistory} from '@interfaces/VehicleInterfaces';
+import VehicleDetail from '@components/vehicleDetail/VehicleDetail';
+import {RootState} from '@redux/store';
+import {NavigationProps} from '@navigation/index';
 
 const VehicleDetailsScreen: React.FC = () => {
   const {t} = useTranslation();

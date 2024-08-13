@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import {View, Text} from 'react-native';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store';
 import {useTranslation} from 'react-i18next';
-import i18n from '../../i18n';
+
+// Importando módulos da aplicação usando aliases
+import {RootState} from '@redux/store';
 import styles from './ProfileScreen.styles';
-import UserAvatar from '../../components/userAvatar/UserAvatar';
-import LanguagePicker from '../../components/inputs/picker/LanguagePicker';
+import UserAvatar from '@components/userAvatar/UserAvatar';
+import LanguagePicker from '@components/inputs/picker/LanguagePicker';
+import i18n from '@i18n/i18n';
 
 const ProfileScreen: React.FC = () => {
   const {t} = useTranslation();

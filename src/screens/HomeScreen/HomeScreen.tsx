@@ -1,18 +1,22 @@
 // TODO - Arrumar a inconsistência no carregamento das imagens no Callout do Map (Parou de carregar?)
 // TODO - Arrumar a gambiarra do posicionamento do logo/Avatar
-// TODO - Descobrir como adicionar borderRadius no Map
 
+// Importando bibliotecas externas
 import React, {useEffect, useState} from 'react';
 import {View, Image, SafeAreaView, Alert, Pressable, Text} from 'react-native';
 import MapView, {Marker, Callout} from 'react-native-maps';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store';
-import {fetchVehicles} from '../../services/api-config';
 import {useNavigation} from '@react-navigation/native';
-import {NavigationProps} from '../../navigation';
+
+// Importando módulos da aplicação usando aliases
+import {RootState} from '@redux/store';
+import {fetchVehicles} from '@api/api-config';
+import {NavigationProps} from '@navigation/index';
+import {Vehicle} from '@interfaces/VehicleInterfaces';
+import UserAvatar from '@components/userAvatar/UserAvatar';
+
+// Importando estilos
 import styles from './HomeScreen.styles';
-import {Vehicle} from '../../types/VehicleInterfaces';
-import UserAvatar from '../../components/userAvatar/UserAvatar';
 
 const HomeScreen: React.FC = () => {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);

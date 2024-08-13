@@ -12,7 +12,7 @@ import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
 import VehicleDetailsScreen from '../screens/VehicleDetailsScreen/VehicleDetailsScreen';
 import {RouteProp} from '@react-navigation/native';
 import {StyleSheet} from 'react-native';
-import {Vehicle} from '../types/VehicleInterfaces';
+import {Vehicle} from '../interfaces/VehicleInterfaces';
 
 type RootStackParamList = {
   Login: undefined;
