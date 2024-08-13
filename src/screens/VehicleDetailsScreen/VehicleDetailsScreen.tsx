@@ -11,7 +11,7 @@ import {Vehicle, VehicleHistory} from '@interfaces/VehicleInterfaces';
 import VehicleDetail from '@components/vehicleDetail/VehicleDetail';
 import {RootState} from '@redux/store';
 import {NavigationProps} from '@navigation/index';
-import VehicleInfo from '@components/vehicleInfo/VehicleInfo'; // Importando o novo componente
+import VehicleInfo from '@components/vehicleInfo/VehicleInfo';
 
 const VehicleDetailsScreen: React.FC = () => {
   const {t} = useTranslation();
@@ -25,10 +25,7 @@ const VehicleDetailsScreen: React.FC = () => {
   useEffect(() => {
     const getVehicleHistory = async () => {
       if (!token) {
-        Alert.alert(
-          'Erro',
-          'Token de autenticação não encontrado. Por favor, faça login novamente.',
-        );
+        Alert.alert(t('error'), t('tokenNotFoundError'));
         navigation.navigate('Login');
 
         return;
@@ -38,10 +35,7 @@ const VehicleDetailsScreen: React.FC = () => {
         const data = await fetchVehicleHistory(token);
         setHistory(data);
       } catch (error) {
-        Alert.alert(
-          'Erro',
-          'Não foi possível carregar o histórico do veículo.',
-        );
+        Alert.alert(t('error'), t('loadHistoryError'));
       }
     };
 
@@ -51,7 +45,7 @@ const VehicleDetailsScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{t('details')}</Text>
-      <VehicleInfo vehicle={vehicle} /> {/* Usando o novo componente */}
+      <VehicleInfo vehicle={vehicle} />
       <Text style={styles.historyTitle}>{t('history')}</Text>
       <View style={styles.historyHeader}>
         <Text style={styles.historyHeaderText}>{t('dateTime')}</Text>

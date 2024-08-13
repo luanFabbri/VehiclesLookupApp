@@ -1,9 +1,15 @@
-//TODO - Mensagens de erro precisam de tradução!
+// Imports de Redux
+import {setToken} from '@redux/slices/authSlice';
 
-import {setToken} from '../redux/slices/authSlice';
-import {Login, Profile} from '../interfaces/loginInterfaces';
-import {Vehicle, VehicleHistory} from '../interfaces/VehicleInterfaces';
+// Imports de Interfaces
+import {Vehicle, VehicleHistory} from '@interfaces/VehicleInterfaces';
+import {Login, Profile} from '@interfaces/LoginInterfaces';
+
+// Imports de Variáveis de Ambiente
 import {API_URL} from '@env';
+
+// Importando i18n para traduções
+import {t} from 'i18next';
 
 // Função para realizar o login e retornar o id_token
 export const login = async (
@@ -12,8 +18,6 @@ export const login = async (
 ) => {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 6000);
-
-  console.log('email: ', values.email, ' pass: ', values.password);
 
   try {
     const response = await fetch(`${API_URL}/login`, {
@@ -30,25 +34,24 @@ export const login = async (
       dispatch(setToken(data.id_token));
       return {status: 'success', data: data.id_token};
     } else if (response.status === 401) {
-      return {status: 'error', message: 'Usuário ou senha inválidos!'};
+      return {status: 'error', message: t('errors.invalidCredentials')};
     } else if (response.status === 500 || response.status === 504) {
       return {
         status: 'error',
-        message: `Ops! Encontramos um problema. Tente novamente e se o erro persistir contate nosso suporte. (Erro ${response.status})`,
+        message: t('errors.serverError', {status: response.status}),
       };
     }
   } catch (error: any) {
     if (error.name === 'AbortError') {
       return {
         status: 'error',
-        message:
-          'A requisição demorou muito para responder. Tente novamente. (Erro 504)',
+        message: t('errors.timeout'),
       };
     }
     console.log(error);
     return {
       status: 'error',
-      message: 'Ocorreu um erro desconhecido. Tente novamente.',
+      message: t('errors.unknownError'),
     };
   }
 };
@@ -70,14 +73,13 @@ export const getProfile = async (token: string) => {
     } else {
       return {
         status: 'error',
-        message: `Erro ao obter o perfil do usuário. (Erro ${response.status})`,
+        message: t('errors.getProfile', {status: response.status}),
       };
     }
   } catch (error) {
     return {
       status: 'error',
-      message:
-        'Ocorreu um erro desconhecido ao obter o perfil. Tente novamente.',
+      message: t('errors.unknownErrorProfile'),
     };
   }
 };
@@ -96,10 +98,10 @@ export const fetchVehicles = async (token: string) => {
       const data: Vehicle[] = await response.json();
       return data;
     } else {
-      throw new Error(`Erro ao buscar veículos: ${response.status}`);
+      throw new Error(t('errors.fetchVehicles', {status: response.status}));
     }
   } catch (error) {
-    throw new Error('Erro ao buscar veículos');
+    throw new Error(t('errors.fetchVehiclesGeneric'));
   }
 };
 
@@ -118,10 +120,10 @@ export const fetchVehicleHistory = async (token: string) => {
       return data;
     } else {
       throw new Error(
-        `Erro ao buscar o histórico do veículo: ${response.status}`,
+        t('errors.fetchVehicleHistory', {status: response.status}),
       );
     }
   } catch (error) {
-    throw new Error('Erro ao buscar o histórico do veículo');
+    throw new Error(t('errors.fetchVehicleHistoryGeneric'));
   }
 };

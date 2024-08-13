@@ -23,19 +23,17 @@ const LoginScreen: React.FC = () => {
   const formik = useFormik({
     initialValues: {email: '', password: ''},
     validationSchema: Yup.object({
-      email: Yup.string().email('Email inválido').required('Campo obrigatório'),
-      password: Yup.string().required('Campo obrigatório'),
+      email: Yup.string().email(t('invalidEmail')).required(t('requiredField')),
+      password: Yup.string().required(t('requiredField')),
     }),
     onSubmit: async values => {
       setLoading(true);
       const result = await login(values, dispatch);
 
       if (result?.status === 'success' && result.data) {
-        console.log('Login bem-sucedido', result.data);
         const profileResult = await getProfile(result.data);
 
         if (profileResult.status === 'success' && profileResult.data) {
-          console.log('Perfil do usuário', profileResult.data);
           dispatch(setProfile(profileResult.data));
           navigation.dispatch(
             CommonActions.reset({
@@ -44,10 +42,10 @@ const LoginScreen: React.FC = () => {
             }),
           );
         } else {
-          Alert.alert('Erro', profileResult.message);
+          Alert.alert(t('error'), profileResult.message || t('unknownError'));
         }
       } else if (result?.status === 'error') {
-        Alert.alert('Erro', result.message);
+        Alert.alert(t('error'), result.message || t('unknownError'));
       }
 
       setLoading(false);
@@ -58,7 +56,7 @@ const LoginScreen: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
         <CustomInput
-          placeholder="E-mail"
+          placeholder={t('email')}
           value={formik.values.email}
           onChangeText={formik.handleChange('email')}
           onBlur={() => formik.handleBlur('email')}
@@ -74,7 +72,7 @@ const LoginScreen: React.FC = () => {
           secureTextEntry
         />
         <CustomButton
-          title="Login"
+          title={t('login')}
           onPress={formik.handleSubmit as any}
           loading={loading}
         />

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, Image, SafeAreaView, Alert, Pressable} from 'react-native';
 import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
+import {useTranslation} from 'react-i18next';
 
 // Importando módulos da aplicação usando aliases
 import {RootState} from '@redux/store';
@@ -19,14 +20,12 @@ const HomeScreen: React.FC = () => {
   const token = useSelector((state: RootState) => state.auth.token);
   const userName = useSelector((state: RootState) => state.auth.profile?.name);
   const navigation = useNavigation<NavigationProps>();
+  const {t} = useTranslation();
 
   useEffect(() => {
     const getVehicles = async () => {
       if (!token) {
-        Alert.alert(
-          'Erro',
-          'Token de autenticação não encontrado. Por favor, faça login novamente.',
-        );
+        Alert.alert(t('error'), t('authError'));
         navigation.navigate('Login');
         return;
       }
@@ -35,12 +34,12 @@ const HomeScreen: React.FC = () => {
         const data = await fetchVehicles(token);
         setVehicles(data);
       } catch (error) {
-        Alert.alert('Erro', 'Não foi possível carregar os veículos.');
+        Alert.alert(t('error'), t('loadVehiclesError'));
       }
     };
 
     getVehicles();
-  }, [token, navigation]);
+  }, [token, navigation, t]);
 
   const handlePressAvatar = () => {
     navigation.navigate('Profile');
