@@ -1,4 +1,4 @@
-package com.ituranmobtechinterviewapp
+package com.VehiclesLookupMockup
 
 import android.app.Application
 import com.facebook.react.PackageList

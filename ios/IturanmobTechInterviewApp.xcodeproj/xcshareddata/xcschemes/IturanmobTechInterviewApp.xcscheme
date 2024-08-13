@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "IturanmobTechInterviewApp.app"
-               BlueprintName = "IturanmobTechInterviewApp"
-               ReferencedContainer = "container:IturanmobTechInterviewApp.xcodeproj">
+               BuildableName = "VehiclesLookupMockup.app"
+               BlueprintName = "VehiclesLookupMockup"
+               ReferencedContainer = "container:VehiclesLookupMockup.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "IturanmobTechInterviewAppTests.xctest"
-               BlueprintName = "IturanmobTechInterviewAppTests"
-               ReferencedContainer = "container:IturanmobTechInterviewApp.xcodeproj">
+               BuildableName = "VehiclesLookupMockupTests.xctest"
+               BlueprintName = "VehiclesLookupMockupTests"
+               ReferencedContainer = "container:VehiclesLookupMockup.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "IturanmobTechInterviewApp.app"
-            BlueprintName = "IturanmobTechInterviewApp"
-            ReferencedContainer = "container:IturanmobTechInterviewApp.xcodeproj">
+            BuildableName = "VehiclesLookupMockup.app"
+            BlueprintName = "VehiclesLookupMockup"
+            ReferencedContainer = "container:VehiclesLookupMockup.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "IturanmobTechInterviewApp.app"
-            BlueprintName = "IturanmobTechInterviewApp"
-            ReferencedContainer = "container:IturanmobTechInterviewApp.xcodeproj">
+            BuildableName = "VehiclesLookupMockup.app"
+            BlueprintName = "VehiclesLookupMockup"
+            ReferencedContainer = "container:VehiclesLookupMockup.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
