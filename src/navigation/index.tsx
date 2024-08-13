@@ -1,17 +1,19 @@
-// TODO - Remover customHeaderTitleStyle uma vez que remevi o cabeçalho
-
+// Imports do React e Navegação
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
+import {RouteProp} from '@react-navigation/native';
+
+// Imports das Telas
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
 import VehicleDetailsScreen from '../screens/VehicleDetailsScreen/VehicleDetailsScreen';
-import {RouteProp} from '@react-navigation/native';
-import {StyleSheet} from 'react-native';
+
+// Imports de Tipos
 import {Vehicle} from '../interfaces/VehicleInterfaces';
 
 type RootStackParamList = {
@@ -21,25 +23,12 @@ type RootStackParamList = {
   VehicleDetails: {vehicle: Vehicle};
 };
 
-const customHeaderTitleStyle = StyleSheet.create({
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#000',
-  },
-});
-
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={{
-          headerTitleStyle: customHeaderTitleStyle.title,
-          headerTitleAlign: 'center',
-        }}>
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           name="Login"
           component={LoginScreen}

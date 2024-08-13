@@ -11,8 +11,8 @@ import styles from './LoginScreen.styles';
 import {login, getProfile} from '@api/api-config';
 import {setProfile} from '@redux/slices/authSlice';
 import {NavigationProps} from '@navigation/index';
-import CustomInput from '@components/inputs/customInput/CustomInput'; // Atualize o caminho conforme a estrutura
-import CustomButton from '@components/inputs/customButton/CustomButton'; // Atualize o caminho conforme a estrutura
+import CustomInput from '@components/inputs/customInput/CustomInput';
+import CustomButton from '@components/inputs/customButton/CustomButton';
 
 const LoginScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
