@@ -1,17 +1,5 @@
-// TODO - Adicionar visual na tela
-// TODO - Componentizar botões e inputs
-// TODO - Trocar idioma em login
-
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TextInput,
-  Button,
-  Alert,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, SafeAreaView, Alert} from 'react-native';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
@@ -23,6 +11,8 @@ import styles from './LoginScreen.styles';
 import {login, getProfile} from '@api/api-config';
 import {setProfile} from '@redux/slices/authSlice';
 import {NavigationProps} from '@navigation/index';
+import CustomInput from '@components/inputs/customInput/CustomInput'; // Atualize o caminho conforme a estrutura
+import CustomButton from '@components/inputs/customButton/CustomButton'; // Atualize o caminho conforme a estrutura
 
 const LoginScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -67,34 +57,27 @@ const LoginScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
-        <TextInput
-          style={styles.input}
+        <CustomInput
           placeholder="E-mail"
-          keyboardType="email-address"
-          onChangeText={formik.handleChange('email')}
-          onBlur={formik.handleBlur('email')}
           value={formik.values.email}
+          onChangeText={formik.handleChange('email')}
+          onBlur={() => formik.handleBlur('email')}
+          error={formik.touched.email ? formik.errors.email : undefined}
+          keyboardType="email-address"
         />
-        {formik.touched.email && formik.errors.email ? (
-          <Text style={styles.error}>{formik.errors.email}</Text>
-        ) : null}
-        <TextInput
-          style={styles.input}
+        <CustomInput
           placeholder={t('password')}
-          secureTextEntry
-          onChangeText={formik.handleChange('password')}
-          onBlur={formik.handleBlur('password')}
           value={formik.values.password}
+          onChangeText={formik.handleChange('password')}
+          onBlur={() => formik.handleBlur('password')}
+          error={formik.touched.password ? formik.errors.password : undefined}
+          secureTextEntry
         />
-        {formik.touched.password && formik.errors.password ? (
-          <Text style={styles.error}>{formik.errors.password}</Text>
-        ) : null}
-        <Button onPress={formik.handleSubmit as any} title="Login" />
-        {loading && (
-          <View style={styles.loading}>
-            <ActivityIndicator size="large" color="#0000ff" />
-          </View>
-        )}
+        <CustomButton
+          title="Login"
+          onPress={formik.handleSubmit as any}
+          loading={loading}
+        />
       </View>
     </SafeAreaView>
   );

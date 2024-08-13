@@ -1,10 +1,5 @@
-// TODO - Arrumar a inconsistência no carregamento das imagens no Callout do Map (Parou de carregar?)
-// TODO - Arrumar a gambiarra do posicionamento do logo/Avatar
-
-// Importando bibliotecas externas
 import React, {useEffect, useState} from 'react';
-import {View, Image, SafeAreaView, Alert, Pressable, Text} from 'react-native';
-import MapView, {Marker, Callout} from 'react-native-maps';
+import {View, Image, SafeAreaView, Alert, Pressable} from 'react-native';
 import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 
@@ -14,6 +9,7 @@ import {fetchVehicles} from '@api/api-config';
 import {NavigationProps} from '@navigation/index';
 import {Vehicle} from '@interfaces/VehicleInterfaces';
 import UserAvatar from '@components/userAvatar/UserAvatar';
+import CustomMapView from '@components/map/customMapView/CustomMapView';
 
 // Importando estilos
 import styles from './HomeScreen.styles';
@@ -68,39 +64,16 @@ const HomeScreen: React.FC = () => {
           />
         </Pressable>
       </View>
-      <MapView
-        style={styles.map}
+      <CustomMapView
+        vehicles={vehicles}
+        onMarkerPress={handleMarkerPress}
         initialRegion={{
           latitude: -23.55052,
           longitude: -46.633308,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
-        }}>
-        {vehicles.map((vehicle, index) => (
-          <Marker
-            key={index}
-            coordinate={{
-              latitude: vehicle.latitude,
-              longitude: vehicle.longitude,
-            }}
-            title={vehicle.model}
-            description={vehicle.licensePlate}>
-            <Callout
-              onPress={() => handleMarkerPress(vehicle)}
-              style={{width: 180, height: 220}}>
-              <View style={{height: 160, position: 'relative', bottom: 20}}>
-                <Image
-                  resizeMode="cover"
-                  style={{width: 160, height: 105}}
-                  source={{uri: vehicle.pictureLink}}
-                />
-              </View>
-              <Text>{vehicle.model}</Text>
-              <Text>Placa: {vehicle.licensePlate}</Text>
-            </Callout>
-          </Marker>
-        ))}
-      </MapView>
+        }}
+      />
     </SafeAreaView>
   );
 };
