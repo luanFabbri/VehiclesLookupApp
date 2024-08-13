@@ -22,6 +22,8 @@ module.exports = {
           '@navigation': './src/navigation',
           '@interfaces': './src/interfaces',
           '@components': './src/components',
+          '@utils': './src/utils',
+          '@assets': './src/assets',
         },
       },
     ],

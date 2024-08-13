@@ -9,19 +9,12 @@ import styles from './ProfileScreen.styles';
 import UserAvatar from '@components/userAvatar/UserAvatar';
 import LanguagePicker from '@components/inputs/picker/LanguagePicker';
 import i18n from '@i18n/i18n';
+import {toTitleCase} from '@utils/toTitleCase';
 
 const ProfileScreen: React.FC = () => {
   const {t} = useTranslation();
   const userName = useSelector((state: RootState) => state.auth.profile?.name);
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
-
-  const toTitleCase = (str: string) => {
-    return str
-      .toLowerCase()
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
-  };
 
   const handleLanguageChange = (language: string) => {
     setSelectedLanguage(language);

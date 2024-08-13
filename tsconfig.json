@@ -9,7 +9,9 @@
       "@i18n/*": ["services/i18n/*"],
       "@navigation/*": ["navigation/*"],
       "@interfaces/*": ["interfaces/*"],
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"],
+      "@assets/*": ["assets/*"]
     }
   }
 }
