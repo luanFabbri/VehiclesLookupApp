@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
     left: '50%',
     transform: [{translateX: -50}, {translateY: -50}],
   },
+  languagePicker: {
+    paddingTop: 12,
+    width: '80%',
+  },
 });
 
 export default styles;

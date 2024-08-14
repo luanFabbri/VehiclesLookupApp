@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import {useTranslation} from 'react-i18next';
@@ -8,18 +8,11 @@ import {RootState} from '@redux/store';
 import styles from './ProfileScreen.styles';
 import UserAvatar from '@components/userAvatar/UserAvatar';
 import LanguagePicker from '@components/inputs/picker/LanguagePicker';
-import i18n from '@i18n/i18n';
 import {toTitleCase} from '@utils/toTitleCase';
 
 const ProfileScreen: React.FC = () => {
   const {t} = useTranslation();
   const userName = useSelector((state: RootState) => state.auth.profile?.name);
-  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
-
-  const handleLanguageChange = (language: string) => {
-    setSelectedLanguage(language);
-    i18n.changeLanguage(language);
-  };
 
   return (
     <View style={styles.container}>
@@ -32,10 +25,7 @@ const ProfileScreen: React.FC = () => {
         />
       </View>
       <View style={styles.languagePicker}>
-        <LanguagePicker
-          selectedLanguage={selectedLanguage}
-          onLanguageChange={handleLanguageChange}
-        />
+        <LanguagePicker />
       </View>
     </View>
   );

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView, Alert} from 'react-native';
+import {View, SafeAreaView, Alert} from 'react-native';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
@@ -13,6 +13,7 @@ import {setProfile} from '@redux/slices/authSlice';
 import {NavigationProps} from '@navigation/index';
 import CustomInput from '@components/inputs/customInput/CustomInput';
 import CustomButton from '@components/inputs/customButton/CustomButton';
+import LanguagePicker from '@components/inputs/picker/LanguagePicker';
 
 const LoginScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -76,6 +77,9 @@ const LoginScreen: React.FC = () => {
           onPress={formik.handleSubmit as any}
           loading={loading}
         />
+      </View>
+      <View style={styles.languagePicker}>
+        <LanguagePicker />
       </View>
     </SafeAreaView>
   );

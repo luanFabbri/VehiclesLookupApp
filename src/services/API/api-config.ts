@@ -11,64 +11,58 @@ import {API_URL} from '@env';
 // Importando i18n para traduções
 import {t} from 'i18next';
 
+// Importando axios
+import axios from 'axios';
+
+// Configurando instância do axios
+const api = axios.create({
+  baseURL: API_URL,
+  timeout: 6000, // Timeout global para todas as requisições
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
 // Função para realizar o login e retornar o id_token
 export const login = async (
   values: {email: string; password: string},
   dispatch: any,
 ) => {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 6000);
-
   try {
-    const response = await fetch(`${API_URL}/login`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(values),
-      signal: controller.signal,
-    });
-
-    clearTimeout(timeoutId);
+    const response = await api.post('/login', values);
 
     if (response.status === 200) {
-      const data: Login = await response.json();
+      const data: Login = response.data;
       dispatch(setToken(data.id_token));
       return {status: 'success', data: data.id_token};
     } else if (response.status === 401) {
       return {status: 'error', message: t('errors.invalidCredentials')};
-    } else if (response.status === 500 || response.status === 504) {
-      return {
-        status: 'error',
-        message: t('errors.serverError', {status: response.status}),
-      };
     }
   } catch (error: any) {
-    if (error.name === 'AbortError') {
-      return {
-        status: 'error',
-        message: t('errors.timeout'),
-      };
+    if (error.code === 'ECONNABORTED') {
+      return {status: 'error', message: t('errors.timeout')};
+    } else if (error.response) {
+      const status = error.response.status;
+      if (status === 500 || status === 504) {
+        return {status: 'error', message: t('errors.serverError', {status})};
+      }
     }
     console.log(error);
-    return {
-      status: 'error',
-      message: t('errors.unknownError'),
-    };
+    return {status: 'error', message: t('errors.unknownError')};
   }
 };
 
 // Função para obter o perfil do usuário
 export const getProfile = async (token: string) => {
   try {
-    const response = await fetch(`${API_URL}/profile`, {
-      method: 'GET',
+    const response = await api.get('/profile', {
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     });
 
     if (response.status === 200) {
-      const data: Profile = await response.json();
+      const data: Profile = response.data;
       return {status: 'success', data: data};
     } else {
       return {
@@ -77,25 +71,21 @@ export const getProfile = async (token: string) => {
       };
     }
   } catch (error) {
-    return {
-      status: 'error',
-      message: t('errors.unknownErrorProfile'),
-    };
+    return {status: 'error', message: t('errors.unknownErrorProfile')};
   }
 };
 
 // Função para obter os veículos
 export const fetchVehicles = async (token: string) => {
   try {
-    const response = await fetch(`${API_URL}/vehicles`, {
-      method: 'GET',
+    const response = await api.get('/vehicles', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    if (response.ok) {
-      const data: Vehicle[] = await response.json();
+    if (response.status === 200) {
+      const data: Vehicle[] = response.data;
       return data;
     } else {
       throw new Error(t('errors.fetchVehicles', {status: response.status}));
@@ -108,15 +98,14 @@ export const fetchVehicles = async (token: string) => {
 // Função para obter o histórico dos veículos
 export const fetchVehicleHistory = async (token: string) => {
   try {
-    const response = await fetch(`${API_URL}/vehicles/history`, {
-      method: 'GET',
+    const response = await api.get('/vehicles/history', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    if (response.ok) {
-      const data: VehicleHistory[] = await response.json();
+    if (response.status === 200) {
+      const data: VehicleHistory[] = response.data;
       return data;
     } else {
       throw new Error(
