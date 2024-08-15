@@ -36,19 +36,19 @@ export const login = async (
       dispatch(setToken(data.id_token));
       return {status: 'success', data: data.id_token};
     } else if (response.status === 401) {
-      return {status: 'error', message: t('errors.invalidCredentials')};
+      return {status: 'error', message: t('invalidCredentials')};
     }
   } catch (error: any) {
     if (error.code === 'ECONNABORTED') {
-      return {status: 'error', message: t('errors.timeout')};
+      return {status: 'error', message: t('timeout')};
     } else if (error.response) {
       const status = error.response.status;
       if (status === 500 || status === 504) {
-        return {status: 'error', message: t('errors.serverError', {status})};
+        return {status: 'error', message: t('serverError', {status})};
       }
     }
     console.log(error);
-    return {status: 'error', message: t('errors.unknownError')};
+    return {status: 'error', message: t('unknownError')};
   }
 };
 
@@ -67,11 +67,11 @@ export const getProfile = async (token: string) => {
     } else {
       return {
         status: 'error',
-        message: t('errors.getProfile', {status: response.status}),
+        message: t('getProfile', {status: response.status}),
       };
     }
   } catch (error) {
-    return {status: 'error', message: t('errors.unknownErrorProfile')};
+    return {status: 'error', message: t('unknownErrorProfile')};
   }
 };
 
@@ -88,10 +88,10 @@ export const fetchVehicles = async (token: string) => {
       const data: Vehicle[] = response.data;
       return data;
     } else {
-      throw new Error(t('errors.fetchVehicles', {status: response.status}));
+      throw new Error(t('fetchVehicles', {status: response.status}));
     }
   } catch (error) {
-    throw new Error(t('errors.fetchVehiclesGeneric'));
+    throw new Error(t('fetchVehiclesGeneric'));
   }
 };
 
@@ -108,11 +108,9 @@ export const fetchVehicleHistory = async (token: string) => {
       const data: VehicleHistory[] = response.data;
       return data;
     } else {
-      throw new Error(
-        t('errors.fetchVehicleHistory', {status: response.status}),
-      );
+      throw new Error(t('fetchVehicleHistory', {status: response.status}));
     }
   } catch (error) {
-    throw new Error(t('errors.fetchVehicleHistoryGeneric'));
+    throw new Error(t('fetchVehicleHistoryGeneric'));
   }
 };
