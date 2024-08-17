@@ -4,7 +4,7 @@ import './src/services/i18n/i18n';
 import {I18nextProvider} from 'react-i18next';
 import i18n from './src/services/i18n/i18n';
 import {Provider} from 'react-redux';
-import store from './src/redux/store';
+import store from './src/services/redux/store';
 
 const App = () => {
   return (

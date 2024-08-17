@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
 // Importando módulos da aplicação usando aliases
-import {RootState} from '@redux/store';
+import {RootState} from '@services/redux/store';
 import styles from './ProfileScreen.styles';
 import UserAvatar from '@components/userAvatar/UserAvatar';
 import LanguagePicker from '@components/inputs/picker/LanguagePicker';

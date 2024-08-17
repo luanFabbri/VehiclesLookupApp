@@ -34,6 +34,7 @@ const resources = {
       fetchVehicleHistoryErrorGeneric: 'Error fetching vehicle history',
       email: 'E-mail',
       login: 'Login',
+      aboutThisApp: 'About this app',
     },
   },
   es: {
@@ -71,6 +72,7 @@ const resources = {
         'Error al buscar el historial del vehículo',
       email: 'E-mail',
       login: 'Login',
+      aboutThisApp: 'Acerca de esta aplicación',
     },
   },
   pt: {
@@ -106,6 +108,7 @@ const resources = {
       fetchVehicleHistoryErrorGeneric: 'Erro ao buscar o histórico do veículo',
       email: 'E-mail',
       login: 'Login',
+      aboutThisApp: 'Sobre este app',
     },
   },
 };

@@ -15,12 +15,16 @@ import VehicleDetailsScreen from '../screens/VehicleDetailsScreen/VehicleDetails
 
 // Imports de Tipos
 import {Vehicle} from '../interfaces/VehicleInterfaces';
+import AboutScreen from '@screens/AboutScreen/AboutScreen';
+import ConfigScreen from '@screens/ConfigScreen/ConfigScreen';
 
 type RootStackParamList = {
   Login: undefined;
   Home: undefined;
   Profile: undefined;
   VehicleDetails: {vehicle: Vehicle};
+  About: undefined;
+  Config: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -49,6 +53,16 @@ function AppNavigator() {
           component={VehicleDetailsScreen}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="About"
+          component={AboutScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Config"
+          component={ConfigScreen}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -64,3 +78,5 @@ export type VehicleDetailsScreenRouteProp = RouteProp<
   RootStackParamList,
   'VehicleDetails'
 >;
+export type ConfigScreenRouteProp = RouteProp<RootStackParamList, 'Config'>;
+export type AboutScreenRouteProp = RouteProp<RootStackParamList, 'About'>;

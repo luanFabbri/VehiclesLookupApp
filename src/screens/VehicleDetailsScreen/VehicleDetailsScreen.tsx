@@ -9,7 +9,7 @@ import {fetchVehicleHistory} from '@api/api-config';
 import styles from './VehicleDetailsScreen.styles';
 import {Vehicle, VehicleHistory} from '@interfaces/VehicleInterfaces';
 import VehicleDetail from '@components/vehicleDetail/VehicleDetail';
-import {RootState} from '@redux/store';
+import {RootState} from '@services/redux/store';
 import {NavigationProps} from '@navigation/index';
 import VehicleInfo from '@components/vehicleInfo/VehicleInfo';
 

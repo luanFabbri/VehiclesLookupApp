@@ -1,5 +1,5 @@
 // Imports de Redux
-import {setToken} from '@redux/slices/authSlice';
+import {setToken} from '@services/redux/slices/authSlice';
 
 // Imports de Interfaces
 import {Vehicle, VehicleHistory} from '@interfaces/VehicleInterfaces';

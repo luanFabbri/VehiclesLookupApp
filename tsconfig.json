@@ -3,7 +3,6 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@redux/*": ["redux/*"],
       "@services/*": ["services/*"],
       "@api/*": ["services/API/*"],
       "@i18n/*": ["services/i18n/*"],
@@ -11,7 +10,8 @@
       "@interfaces/*": ["interfaces/*"],
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@screens/*": ["screens/*"]
     }
   }
 }

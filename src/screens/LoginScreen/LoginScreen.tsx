@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
-import {View, SafeAreaView, Alert} from 'react-native';
+import {View, SafeAreaView, Text, Alert, TouchableOpacity} from 'react-native';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
 import {CommonActions, useNavigation} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Importando módulos da aplicação usando aliases
 import styles from './LoginScreen.styles';
 import {login, getProfile} from '@api/api-config';
-import {setProfile} from '@redux/slices/authSlice';
+import {setProfile} from '@services/redux/slices/authSlice';
 import {NavigationProps} from '@navigation/index';
 import CustomInput from '@components/inputs/customInput/CustomInput';
 import CustomButton from '@components/inputs/customButton/CustomButton';
@@ -55,7 +56,18 @@ const LoginScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <TouchableOpacity
+        style={styles.iconContainer}
+        onPress={() => navigation.navigate('Config')}>
+        <MaterialCommunityIcons name="cog" size={24} color="grey" />
+      </TouchableOpacity>
+
       <View style={styles.innerContainer}>
+        <View style={{position: 'relative'}}>
+          <Text style={styles.appName}>Vehicle Lookup App!</Text>
+          <Text style={styles.appSubtitle}>Criado por Luan Fabbri</Text>
+        </View>
+
         <CustomInput
           placeholder={t('email')}
           value={formik.values.email}
@@ -76,11 +88,21 @@ const LoginScreen: React.FC = () => {
           title={t('login')}
           onPress={formik.handleSubmit as any}
           loading={loading}
+          style={styles.loginButton}
+          textStyle={styles.loginButtonText}
         />
       </View>
+
       <View style={styles.languagePicker}>
         <LanguagePicker />
       </View>
+
+      <CustomButton
+        title={t('aboutThisApp')}
+        onPress={() => navigation.navigate('About')}
+        style={styles.aboutButton}
+        textStyle={styles.aboutButtonText}
+      />
     </SafeAreaView>
   );
 };

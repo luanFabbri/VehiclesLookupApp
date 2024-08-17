@@ -5,7 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 
 // Importando módulos da aplicação usando aliases
-import {RootState} from '@redux/store';
+import {RootState} from '@services/redux/store';
 import {fetchVehicles} from '@api/api-config';
 import {NavigationProps} from '@navigation/index';
 import {Vehicle} from '@interfaces/VehicleInterfaces';
