@@ -40,11 +40,11 @@ export const login = async (
     }
   } catch (error: any) {
     if (error.code === 'ECONNABORTED') {
-      return {status: 'error', message: t('timeout')};
+      return {status: 'error', message: t('timeoutError')};
     } else if (error.response) {
       const status = error.response.status;
       if (status === 500 || status === 504) {
-        return {status: 'error', message: t('serverError', {status})};
+        return {status: 'error', message: t('genericError', {status})};
       }
     }
     console.log(error);
@@ -67,11 +67,11 @@ export const getProfile = async (token: string) => {
     } else {
       return {
         status: 'error',
-        message: t('getProfile', {status: response.status}),
+        message: t('profileFetchError', {status: response.status}),
       };
     }
   } catch (error) {
-    return {status: 'error', message: t('unknownErrorProfile')};
+    return {status: 'error', message: t('unknownProfileError')};
   }
 };
 
@@ -88,10 +88,10 @@ export const fetchVehicles = async (token: string) => {
       const data: Vehicle[] = response.data;
       return data;
     } else {
-      throw new Error(t('fetchVehicles', {status: response.status}));
+      throw new Error(t('fetchVehiclesError', {status: response.status}));
     }
   } catch (error) {
-    throw new Error(t('fetchVehiclesGeneric'));
+    throw new Error(t('fetchVehiclesErrorGeneric'));
   }
 };
 
@@ -108,9 +108,9 @@ export const fetchVehicleHistory = async (token: string) => {
       const data: VehicleHistory[] = response.data;
       return data;
     } else {
-      throw new Error(t('fetchVehicleHistory', {status: response.status}));
+      throw new Error(t('fetchVehicleHistoryError', {status: response.status}));
     }
   } catch (error) {
-    throw new Error(t('fetchVehicleHistoryGeneric'));
+    throw new Error(t('fetchVehicleHistoryErrorGeneric'));
   }
 };

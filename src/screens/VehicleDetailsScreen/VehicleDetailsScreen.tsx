@@ -6,12 +6,15 @@ import {useTranslation} from 'react-i18next';
 
 // Importando módulos da aplicação usando aliases
 import {fetchVehicleHistory} from '@api/api-config';
-import styles from './VehicleDetailsScreen.styles';
 import {Vehicle, VehicleHistory} from '@interfaces/VehicleInterfaces';
 import VehicleDetail from '@components/vehicleDetail/VehicleDetail';
 import {RootState} from '@services/redux/store';
 import {NavigationProps} from '@navigation/index';
 import VehicleInfo from '@components/vehicleInfo/VehicleInfo';
+
+// Estilos
+import styles from './VehicleDetailsScreen.styles';
+import globalStyles from '@utils/GlobalStyles';
 
 const VehicleDetailsScreen: React.FC = () => {
   const {t} = useTranslation();
@@ -43,7 +46,7 @@ const VehicleDetailsScreen: React.FC = () => {
   }, [token, vehicle]);
 
   return (
-    <View style={styles.container}>
+    <View style={[globalStyles.container, styles.container]}>
       <Text style={styles.title}>{t('details')}</Text>
       <VehicleInfo vehicle={vehicle} />
       <Text style={styles.historyTitle}>{t('history')}</Text>

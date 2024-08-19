@@ -22,7 +22,6 @@ module.exports = {
           '@interfaces': './src/interfaces',
           '@components': './src/components',
           '@utils': './src/utils',
-          '@assets': './src/assets',
           '@screens': './src/screens',
         },
       },

@@ -10,7 +10,6 @@
       "@interfaces/*": ["interfaces/*"],
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
-      "@assets/*": ["assets/*"],
       "@screens/*": ["screens/*"]
     }
   }

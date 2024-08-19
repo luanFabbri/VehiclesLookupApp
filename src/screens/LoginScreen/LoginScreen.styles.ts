@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f0f0ff', // Leve coloração cinza
   },
   iconContainer: {
     position: 'absolute',
@@ -16,12 +15,9 @@ const styles = StyleSheet.create({
   appName: {
     fontSize: 32,
     textAlign: 'center',
-    fontFamily: 'GoldenAvocadoSans',
   },
   appSubtitle: {
-    fontSize: 14,
     textAlign: 'center',
-    fontFamily: 'HelveticaNeueBold',
     marginBottom: 90,
   },
   innerContainer: {

@@ -7,14 +7,18 @@ import {CommonActions, useNavigation} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-// Importando módulos da aplicação usando aliases
-import styles from './LoginScreen.styles';
+// Importando módulos da aplicação
 import {login, getProfile} from '@api/api-config';
 import {setProfile} from '@services/redux/slices/authSlice';
 import {NavigationProps} from '@navigation/index';
 import CustomInput from '@components/inputs/customInput/CustomInput';
 import CustomButton from '@components/inputs/customButton/CustomButton';
 import LanguagePicker from '@components/inputs/picker/LanguagePicker';
+import VText from '@components/vtext/VText';
+
+// Estilos
+import styles from './LoginScreen.styles';
+import globalStyles from '@utils/GlobalStyles';
 
 const LoginScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -55,7 +59,7 @@ const LoginScreen: React.FC = () => {
   });
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[globalStyles.container, styles.container]}>
       <TouchableOpacity
         style={styles.iconContainer}
         onPress={() => navigation.navigate('Config')}>
@@ -65,7 +69,9 @@ const LoginScreen: React.FC = () => {
       <View style={styles.innerContainer}>
         <View style={{position: 'relative'}}>
           <Text style={styles.appName}>Vehicle Lookup App!</Text>
-          <Text style={styles.appSubtitle}>Criado por Luan Fabbri</Text>
+          <VText size="small" style={styles.appSubtitle}>
+            {t('createdBy')}
+          </VText>
         </View>
 
         <CustomInput
