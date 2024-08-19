@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, Text, Linking} from 'react-native';
+import {View, Linking} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {format} from 'date-fns';
 import styles from './VehicleDetail.styles.ts';
 import {VehicleHistory} from '../../interfaces/VehicleInterfaces.ts';
+import VText from '@components/vtext/VText.tsx';
 
 interface VehicleDetailProps {
   history: VehicleHistory;
@@ -20,10 +21,10 @@ const VehicleDetail: React.FC<VehicleDetailProps> = ({history}) => {
 
   return (
     <View style={styles.historyItem}>
-      <Text style={styles.historyTextDate}>{formattedDate}</Text>
-      <Text style={styles.historyFuel}>{fuelLevel}%</Text>
-      <Text
-        style={styles.historyTextPosition}>{`${latitude},${longitude}`}</Text>
+      <VText style={styles.historyTextDate}>{formattedDate}</VText>
+      <VText style={styles.historyFuel}>{fuelLevel}%</VText>
+      <VText
+        style={styles.historyTextPosition}>{`${latitude},${longitude}`}</VText>
       <MaterialCommunityIcons
         style={{fontSize: 18, paddingLeft: 5, color: 'grey'}}
         name="open-in-new"

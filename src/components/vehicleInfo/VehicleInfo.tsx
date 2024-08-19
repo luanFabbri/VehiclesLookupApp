@@ -3,6 +3,7 @@ import {View, Text, Image, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Vehicle} from '@interfaces/VehicleInterfaces';
 import styles from './VehicleInfo.styles';
+import VText from '@components/vtext/VText';
 
 interface VehicleInfoProps {
   vehicle: Vehicle;
@@ -15,22 +16,22 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({vehicle}) => {
       <View style={styles.detailsContainer}>
         <View style={styles.detailRow}>
           <View style={styles.detailColumn}>
-            <Text style={styles.model}>{vehicle.model}</Text>
+            <VText style={styles.model}>{vehicle.model}</VText>
           </View>
           <View style={styles.detailColumn}>
             <MaterialCommunityIcons name="counter" size={24} color="black" />
-            <Text style={styles.detailText}>{vehicle.odometerKm} km</Text>
+            <VText style={styles.detailText}>{vehicle.odometerKm} km</VText>
           </View>
         </View>
         <View style={styles.detailRow}>
           <View style={styles.detailColumn}>
-            <Text style={styles.detailText}>
+            <VText style={styles.detailText}>
               {`${vehicle.chassis} • ${vehicle.licensePlate}`}
-            </Text>
+            </VText>
           </View>
           <View style={styles.detailColumn}>
             <MaterialCommunityIcons name="fuel" size={24} color="black" />
-            <Text style={styles.detailText}>{vehicle.fuelLevel}%</Text>
+            <VText style={styles.detailText}>{vehicle.fuelLevel}%</VText>
           </View>
         </View>
       </View>

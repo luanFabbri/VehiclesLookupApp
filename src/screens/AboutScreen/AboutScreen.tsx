@@ -1,6 +1,11 @@
 import React from 'react';
-import {View, Text, ScrollView, Linking} from 'react-native';
+import {View, ScrollView, Linking} from 'react-native';
+
 import {useTranslation} from 'react-i18next';
+import VText from '@components/vtext/VText';
+
+// Estilos
+import styles from './AboutScreen.styles';
 import globalStyles from '@utils/GlobalStyles';
 
 const AboutScreen: React.FC = () => {
@@ -9,32 +14,25 @@ const AboutScreen: React.FC = () => {
   return (
     <View style={globalStyles.container}>
       <ScrollView>
-        <View style={{paddingTop: 36, padding: 20}}>
-          <Text
-            style={{
-              fontSize: 36,
-              lineHeight: 36,
-              fontWeight: 'bold',
-            }}>
-            VehicleLookupApp
-          </Text>
-          <Text style={{fontSize: 16, lineHeight: 24}}>
+        <View style={styles.container}>
+          <VText style={styles.appName}>VehicleLookupApp</VText>
+          <VText style={{fontSize: 16, lineHeight: 24}}>
             {t('aboutScreenDescriptionPt1')}
-          </Text>
-          <Text style={{fontSize: 16, lineHeight: 24, marginTop: 20}}>
+          </VText>
+          <VText style={{fontSize: 16, lineHeight: 24, marginTop: 20}}>
             {t('aboutScreenThanks')}
-            <Text
+            <VText
               style={{color: 'blue'}}
               onPress={() =>
                 Linking.openURL('https://www.linkedin.com/in/lpffabbri/')
               }>
               LinkedIn
-            </Text>
+            </VText>
             .
-          </Text>
-          <Text style={{fontSize: 16, lineHeight: 24, marginTop: 20}}>
+          </VText>
+          <VText style={{fontSize: 16, lineHeight: 24, marginTop: 20}}>
             {t('aboutScreenDescriptionPt2')}
-          </Text>
+          </VText>
         </View>
       </ScrollView>
     </View>

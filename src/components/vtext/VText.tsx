@@ -5,9 +5,15 @@ interface VTextProps {
   size?: 'small' | 'medium' | 'big';
   children: React.ReactNode;
   style?: TextStyle;
+  onPress?: () => void;
 }
 
-const VText: React.FC<VTextProps> = ({size = 'medium', children, style}) => {
+const VText: React.FC<VTextProps> = ({
+  size = 'medium',
+  children,
+  style,
+  onPress,
+}) => {
   const getTextStyle = () => {
     switch (size) {
       case 'small':
@@ -19,7 +25,11 @@ const VText: React.FC<VTextProps> = ({size = 'medium', children, style}) => {
     }
   };
 
-  return <Text style={[getTextStyle(), style]}>{children}</Text>;
+  return (
+    <Text style={[getTextStyle(), style]} onPress={onPress}>
+      {children}
+    </Text>
+  );
 };
 
 const commonTextStyles = StyleSheet.create({

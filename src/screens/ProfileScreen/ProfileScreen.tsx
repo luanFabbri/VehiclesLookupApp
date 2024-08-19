@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 
@@ -8,6 +8,7 @@ import {RootState} from '@services/redux/store';
 import UserAvatar from '@components/userAvatar/UserAvatar';
 import LanguagePicker from '@components/inputs/picker/LanguagePicker';
 import {toTitleCase} from '@utils/Functions';
+import VText from '@components/vtext/VText';
 
 // Estilos
 import styles from './ProfileScreen.styles';
@@ -19,9 +20,9 @@ const ProfileScreen: React.FC = () => {
 
   return (
     <View style={[globalStyles.container, styles.container]}>
-      <Text style={styles.title}>{t('profile')}</Text>
+      <VText style={styles.title}>{t('profile')}</VText>
       <View style={styles.profileData}>
-        <Text style={styles.userName}>{toTitleCase(userName || '')}</Text>
+        <VText style={styles.userName}>{toTitleCase(userName || '')}</VText>
         <UserAvatar
           uri={`https://ui-avatars.com/api/?name=${userName}&background=random`}
           size="big"

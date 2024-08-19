@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, FlatList, Alert} from 'react-native';
+import {View, FlatList, Alert} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {useTranslation} from 'react-i18next';
@@ -15,6 +15,7 @@ import VehicleInfo from '@components/vehicleInfo/VehicleInfo';
 // Estilos
 import styles from './VehicleDetailsScreen.styles';
 import globalStyles from '@utils/GlobalStyles';
+import VText from '@components/vtext/VText';
 
 const VehicleDetailsScreen: React.FC = () => {
   const {t} = useTranslation();
@@ -47,13 +48,13 @@ const VehicleDetailsScreen: React.FC = () => {
 
   return (
     <View style={[globalStyles.container, styles.container]}>
-      <Text style={styles.title}>{t('details')}</Text>
+      <VText style={styles.title}>{t('details')}</VText>
       <VehicleInfo vehicle={vehicle} />
-      <Text style={styles.historyTitle}>{t('history')}</Text>
+      <VText style={styles.historyTitle}>{t('history')}</VText>
       <View style={styles.historyHeader}>
-        <Text style={styles.historyHeaderText}>{t('dateTime')}</Text>
-        <Text style={styles.historyHeaderText}>{t('fuel')}</Text>
-        <Text style={styles.historyHeaderText}>{t('position')}</Text>
+        <VText style={styles.historyHeaderText}>{t('dateTime')}</VText>
+        <VText style={styles.historyHeaderText}>{t('fuel')}</VText>
+        <VText style={styles.historyHeaderText}>{t('position')}</VText>
       </View>
       <FlatList
         data={history}

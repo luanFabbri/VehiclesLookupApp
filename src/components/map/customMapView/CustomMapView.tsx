@@ -1,8 +1,9 @@
 import React from 'react';
 import MapView, {Marker, Callout} from 'react-native-maps';
-import {View, Image, Text, StyleSheet} from 'react-native';
+import {View, Image} from 'react-native';
 import {Vehicle} from '@interfaces/VehicleInterfaces';
 import styles from './CustomMapView.styles';
+import VText from '@components/vtext/VText';
 
 interface CustomMapViewProps {
   vehicles: Vehicle[];
@@ -40,8 +41,8 @@ const CustomMapView: React.FC<CustomMapViewProps> = ({
                 style={styles.calloutImage}
                 source={{uri: vehicle.pictureLink}}
               />
-              <Text>{vehicle.model}</Text>
-              <Text>Placa: {vehicle.licensePlate}</Text>
+              <VText>{vehicle.model}</VText>
+              <VText>Placa: {vehicle.licensePlate}</VText>
             </View>
           </Callout>
         </Marker>

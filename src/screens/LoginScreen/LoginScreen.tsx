@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, SafeAreaView, Text, Alert, TouchableOpacity} from 'react-native';
+import {View, SafeAreaView, Alert, TouchableOpacity} from 'react-native';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
@@ -68,7 +68,7 @@ const LoginScreen: React.FC = () => {
 
       <View style={styles.innerContainer}>
         <View style={{position: 'relative'}}>
-          <Text style={styles.appName}>Vehicle Lookup App!</Text>
+          <VText style={styles.appName}>Vehicle Lookup App!</VText>
           <VText size="small" style={styles.appSubtitle}>
             {t('createdBy')}
           </VText>
