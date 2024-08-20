@@ -39,7 +39,7 @@ server.get('/profile', (request, response) => {
 
   return response
     .status(200)
-    .json({name: 'TESTE ITURANMOB', email: 'TEST@ITURANMOB.COM.BR'});
+    .json({name: 'USER TESTE', email: 'TEST@TEST.COM.BR'});
 });
 
 server.post('/login', (request, response) => {

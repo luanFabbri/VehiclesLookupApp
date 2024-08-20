@@ -1,4 +1,5 @@
 const { faker } = require("@faker-js/faker");
+const path = require('path');
 
 function createVehicle() {
   return {
@@ -9,8 +10,7 @@ function createVehicle() {
     model: `${faker.vehicle.manufacturer()} ${faker.vehicle.model()}`,
     latitude: faker.location.latitude(),
     longitude: faker.location.longitude(),
-    pictureLink:
-      "https://s3.us-east-2.amazonaws.com/images.pool.moblab.digital/8958a603-ec68-4aeb-a1d6-42ccf3388fa2-jepp%20compass.png",
+    pictureLink: path.join(__dirname, '../images/car-picture.png'),
   };
 }
 
