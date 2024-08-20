@@ -13,18 +13,19 @@ import {setProfile} from '@services/redux/slices/authSlice';
 import {NavigationProps} from '@navigation/index';
 import CustomInput from '@components/inputs/customInput/CustomInput';
 import CustomButton from '@components/inputs/customButton/CustomButton';
-import LanguagePicker from '@components/inputs/picker/LanguagePicker';
 import VText from '@components/vtext/VText';
 
 // Estilos
 import styles from './LoginScreen.styles';
-import globalStyles from '@utils/GlobalStyles';
+import useGlobalStyles from '@utils/GlobalStyles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation<NavigationProps>();
   const {t} = useTranslation();
+  const GlobalStyles = useGlobalStyles();
 
   const formik = useFormik({
     initialValues: {email: '', password: ''},
@@ -37,6 +38,7 @@ const LoginScreen: React.FC = () => {
       const result = await login(values, dispatch);
 
       if (result?.status === 'success' && result.data) {
+        await AsyncStorage.setItem('@token', result.data);
         const profileResult = await getProfile(result.data);
 
         if (profileResult.status === 'success' && profileResult.data) {
@@ -59,11 +61,15 @@ const LoginScreen: React.FC = () => {
   });
 
   return (
-    <SafeAreaView style={[globalStyles.container, styles.container]}>
+    <SafeAreaView style={[GlobalStyles.container, styles.container]}>
       <TouchableOpacity
         style={styles.iconContainer}
         onPress={() => navigation.navigate('Config')}>
-        <MaterialCommunityIcons name="cog" size={24} color="grey" />
+        <MaterialCommunityIcons
+          name="cog"
+          size={24}
+          color={GlobalStyles.commonTextMedium.color}
+        />
       </TouchableOpacity>
 
       <View style={styles.innerContainer}>
@@ -99,15 +105,11 @@ const LoginScreen: React.FC = () => {
         />
       </View>
 
-      <View style={styles.languagePicker}>
-        <LanguagePicker />
-      </View>
-
       <CustomButton
         title={t('aboutThisApp')}
         onPress={() => navigation.navigate('About')}
         style={styles.aboutButton}
-        textStyle={styles.aboutButtonText}
+        textStyle={GlobalStyles.aboutButtonText}
       />
     </SafeAreaView>
   );

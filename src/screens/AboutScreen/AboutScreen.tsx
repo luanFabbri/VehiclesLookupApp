@@ -6,9 +6,10 @@ import VText from '@components/vtext/VText';
 
 // Estilos
 import styles from './AboutScreen.styles';
-import globalStyles from '@utils/GlobalStyles';
+import useGlobalStyles from '@utils/GlobalStyles';
 
 const AboutScreen: React.FC = () => {
+  const globalStyles = useGlobalStyles();
   const {t} = useTranslation();
 
   return (

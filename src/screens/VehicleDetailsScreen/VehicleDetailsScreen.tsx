@@ -11,13 +11,14 @@ import VehicleDetail from '@components/vehicleDetail/VehicleDetail';
 import {RootState} from '@services/redux/store';
 import {NavigationProps} from '@navigation/index';
 import VehicleInfo from '@components/vehicleInfo/VehicleInfo';
+import VText from '@components/vtext/VText';
 
 // Estilos
 import styles from './VehicleDetailsScreen.styles';
-import globalStyles from '@utils/GlobalStyles';
-import VText from '@components/vtext/VText';
+import useGlobalStyles from '@utils/GlobalStyles';
 
 const VehicleDetailsScreen: React.FC = () => {
+  const globalStyles = useGlobalStyles();
   const {t} = useTranslation();
   const route = useRoute<RouteProp<{params: {vehicle: Vehicle}}, 'params'>>();
   const {vehicle} = route.params;

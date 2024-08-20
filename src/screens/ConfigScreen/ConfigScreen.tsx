@@ -1,11 +1,27 @@
 import React from 'react';
-import {View, SafeAreaView, Text} from 'react-native';
+import {View, SafeAreaView} from 'react-native';
+
+// Components internos
+import LanguagePicker from '@components/inputs/picker/LanguagePicker';
+import DarkModeToggle from '@components/inputs/darkModeToggle/DarkModeToggle';
+
+// Estilos
+import styles from './ConfigScreen.styles';
+import useGlobalStyles from '@utils/GlobalStyles';
+import VText from '@components/vtext/VText';
 
 const ConfigScreen: React.FC = () => {
+  const globalStyles = useGlobalStyles();
   return (
-    <SafeAreaView>
+    <SafeAreaView style={[globalStyles.container, styles.container]}>
+      <View style={styles.headerText}>
+        <VText size="big">Configurações</VText>
+      </View>
       <View>
-        <Text>Hello World - Config</Text>
+        <DarkModeToggle />
+      </View>
+      <View style={styles.languagePickerContainer}>
+        <LanguagePicker />
       </View>
     </SafeAreaView>
   );

@@ -1,4 +1,3 @@
-// Imports do React e Navegação
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {
@@ -7,18 +6,18 @@ import {
 } from '@react-navigation/native-stack';
 import {RouteProp} from '@react-navigation/native';
 
-// Imports das Telas
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
 import VehicleDetailsScreen from '../screens/VehicleDetailsScreen/VehicleDetailsScreen';
-
-// Imports de Tipos
-import {Vehicle} from '../interfaces/VehicleInterfaces';
 import AboutScreen from '@screens/AboutScreen/AboutScreen';
 import ConfigScreen from '@screens/ConfigScreen/ConfigScreen';
 
-type RootStackParamList = {
+import {Vehicle} from '../interfaces/VehicleInterfaces';
+import SplashScreen from '@screens/SplashScreen/SplashScreen';
+
+export type RootStackParamList = {
+  Splash: undefined;
   Login: undefined;
   Home: undefined;
   Profile: undefined;
@@ -32,7 +31,12 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Splash">
+        <Stack.Screen
+          name="Splash"
+          component={SplashScreen}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Login"
           component={LoginScreen}
@@ -80,3 +84,4 @@ export type VehicleDetailsScreenRouteProp = RouteProp<
 >;
 export type ConfigScreenRouteProp = RouteProp<RootStackParamList, 'Config'>;
 export type AboutScreenRouteProp = RouteProp<RootStackParamList, 'About'>;
+export type SplashScreenRouteProp = RouteProp<RootStackParamList, 'Splash'>;

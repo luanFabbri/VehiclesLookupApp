@@ -25,7 +25,6 @@ const HomeScreen: React.FC = () => {
   useEffect(() => {
     const getVehicles = async () => {
       if (!token) {
-        Alert.alert(t('error'), t('authError'));
         navigation.navigate('Login');
         return;
       }

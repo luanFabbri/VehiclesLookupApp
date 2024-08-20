@@ -22,9 +22,9 @@ const smallStyles = StyleSheet.create({
 
 const bigStyles = StyleSheet.create({
   avatar: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
   } as ImageStyle,
 });
 

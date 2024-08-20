@@ -1,3 +1,4 @@
+import useGlobalStyles from '@utils/GlobalStyles';
 import React from 'react';
 import {StyleSheet, Text, TextStyle} from 'react-native';
 
@@ -14,14 +15,15 @@ const VText: React.FC<VTextProps> = ({
   style,
   onPress,
 }) => {
+  const globalStyles = useGlobalStyles();
   const getTextStyle = () => {
     switch (size) {
       case 'small':
-        return commonTextStyles.commonTextSmall;
+        return globalStyles.commonTextSmall;
       case 'big':
-        return commonTextStyles.commonTextBig;
+        return globalStyles.commonTextBig;
       default:
-        return commonTextStyles.commonTextMedium;
+        return globalStyles.commonTextMedium;
     }
   };
 
@@ -31,17 +33,5 @@ const VText: React.FC<VTextProps> = ({
     </Text>
   );
 };
-
-const commonTextStyles = StyleSheet.create({
-  commonTextSmall: {
-    fontSize: 14,
-  },
-  commonTextMedium: {
-    fontSize: 16,
-  },
-  commonTextBig: {
-    fontSize: 32,
-  },
-});
 
 export default VText;

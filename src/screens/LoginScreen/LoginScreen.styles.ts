@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   appSubtitle: {
     textAlign: 'center',
-    marginBottom: 90,
+    marginBottom: 70,
   },
   innerContainer: {
     width: '80%',
@@ -37,13 +37,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  aboutButtonText: {
-    color: '#001f3f', // Azul marinho para o texto
-  },
-  languagePicker: {
-    paddingTop: 12,
-    width: '80%',
   },
 });
 

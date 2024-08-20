@@ -1,6 +1,8 @@
 import React from 'react';
-import {View, TextInput, Text} from 'react-native';
+import {View, TextInput} from 'react-native';
 import styles from './CustomInput.styles';
+import VText from '@components/vtext/VText';
+import useGlobalStyles from '@utils/GlobalStyles';
 
 interface CustomInputProps {
   placeholder: string;
@@ -20,19 +22,27 @@ const CustomInput: React.FC<CustomInputProps> = ({
   error,
   secureTextEntry,
   keyboardType,
-}) => (
-  <View style={styles.container}>
-    <TextInput
-      style={[styles.input, error ? styles.inputError : null]}
-      placeholder={placeholder}
-      value={value}
-      onChangeText={onChangeText}
-      onBlur={onBlur}
-      secureTextEntry={secureTextEntry}
-      keyboardType={keyboardType}
-    />
-    {error ? <Text style={styles.error}>{error}</Text> : null}
-  </View>
-);
+}) => {
+  const globalStyles = useGlobalStyles();
+  return (
+    <View style={styles.container}>
+      <TextInput
+        style={[
+          globalStyles.commonTextMedium,
+          styles.input,
+          error ? styles.inputError : null,
+        ]}
+        placeholder={placeholder}
+        placeholderTextColor={globalStyles.commonTextMedium.color}
+        value={value}
+        onChangeText={onChangeText}
+        onBlur={onBlur}
+        secureTextEntry={secureTextEntry}
+        keyboardType={keyboardType}
+      />
+      {error ? <VText style={styles.error}>{error}</VText> : null}
+    </View>
+  );
+};
 
 export default CustomInput;
