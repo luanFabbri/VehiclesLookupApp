@@ -52,11 +52,23 @@ const ProfileScreen: React.FC = () => {
           size="big"
         />
       </View>
-      <View>
-        <CustomButton title="Configurações" onPress={handleConfigPress} />
-      </View>
-      <View>
-        <CustomButton title="Sair" onPress={handleLogoutPress} />
+      <View style={styles.profileOptionsView}>
+        <View>
+          <CustomButton
+            title="Configurações"
+            onPress={handleConfigPress}
+            style={styles.pofileButton}
+            textStyle={styles.profileButtonText}
+          />
+        </View>
+        <View>
+          <CustomButton
+            title="Sair"
+            onPress={handleLogoutPress}
+            style={styles.pofileButton}
+            textStyle={styles.profileButtonText}
+          />
+        </View>
       </View>
     </View>
   );

@@ -27,6 +27,18 @@ const styles = StyleSheet.create({
   languagePicker: {
     width: '80%',
   },
+  pofileButton: {
+    width: '100%',
+    backgroundColor: 'grey',
+    marginBottom: 8,
+  },
+  profileButtonText: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+  },
+  profileOptionsView: {
+    width: '100%',
+  },
 });
 
 export default styles;
