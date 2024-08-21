@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   appName: {
-    fontSize: 32,
+    fontSize: 36,
     textAlign: 'center',
   },
   appSubtitle: {
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     backgroundColor: '#001f3f', // Azul marinho
+    marginBottom: 8,
   },
   loginButtonText: {
     color: '#fff',

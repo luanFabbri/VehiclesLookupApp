@@ -17,6 +17,12 @@ import styles from './HomeScreen.styles';
 
 const HomeScreen: React.FC = () => {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const [initialRegion, setInitialRegion] = useState<{
+    latitude: number;
+    longitude: number;
+    latitudeDelta: number;
+    longitudeDelta: number;
+  } | null>(null);
   const token = useSelector((state: RootState) => state.auth.token);
   const userName = useSelector((state: RootState) => state.auth.profile?.name);
   const navigation = useNavigation<NavigationProps>();
@@ -28,17 +34,25 @@ const HomeScreen: React.FC = () => {
         navigation.navigate('Login');
         return;
       }
-
       try {
         const data = await fetchVehicles(token);
         setVehicles(data);
+
+        if (data.length > 0) {
+          setInitialRegion({
+            latitude: data[0].latitude,
+            longitude: data[0].longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          });
+        }
       } catch (error) {
         Alert.alert(t('error'), t('loadVehiclesError'));
       }
     };
 
     getVehicles();
-  }, [token, navigation, t]);
+  }, [token]);
 
   const handlePressAvatar = () => {
     navigation.navigate('Profile');
@@ -62,16 +76,13 @@ const HomeScreen: React.FC = () => {
           />
         </Pressable>
       </View>
-      <CustomMapView
-        vehicles={vehicles}
-        onMarkerPress={handleMarkerPress}
-        initialRegion={{
-          latitude: -23.55052,
-          longitude: -46.633308,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      />
+      {initialRegion && (
+        <CustomMapView
+          vehicles={vehicles}
+          onMarkerPress={handleMarkerPress}
+          initialRegion={initialRegion}
+        />
+      )}
     </SafeAreaView>
   );
 };

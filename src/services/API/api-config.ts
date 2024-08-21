@@ -47,7 +47,6 @@ export const login = async (
         return {status: 'error', message: t('genericError', {status})};
       }
     }
-    console.log(error);
     return {status: 'error', message: t('unknownError')};
   }
 };

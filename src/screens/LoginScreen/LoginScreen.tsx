@@ -9,11 +9,12 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 // Importando módulos da aplicação
 import {login, getProfile} from '@api/api-config';
-import {setProfile} from '@services/redux/slices/authSlice';
+import {setProfile, setToken} from '@services/redux/slices/authSlice';
 import {NavigationProps} from '@navigation/index';
 import CustomInput from '@components/inputs/customInput/CustomInput';
 import CustomButton from '@components/inputs/customButton/CustomButton';
 import VText from '@components/vtext/VText';
+import {TOKEN} from '@env';
 
 // Estilos
 import styles from './LoginScreen.styles';
@@ -26,6 +27,24 @@ const LoginScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProps>();
   const {t} = useTranslation();
   const GlobalStyles = useGlobalStyles();
+
+  const handleForceLogin = async () => {
+    await AsyncStorage.setItem('@token', TOKEN);
+    dispatch(setToken(TOKEN));
+    const profileResult = await getProfile(TOKEN);
+
+    if (profileResult.status === 'success' && profileResult.data) {
+      dispatch(setProfile(profileResult.data));
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'Home'}],
+        }),
+      );
+    } else {
+      Alert.alert(t('error'), profileResult.message || t('unknownError'));
+    }
+  };
 
   const formik = useFormik({
     initialValues: {email: '', password: ''},
@@ -74,7 +93,7 @@ const LoginScreen: React.FC = () => {
 
       <View style={styles.innerContainer}>
         <View style={{position: 'relative'}}>
-          <VText style={styles.appName}>Vehicle Lookup App!</VText>
+          <VText style={styles.appName}>Vehicle Lookup App</VText>
           <VText size="small" style={styles.appSubtitle}>
             {t('createdBy')}
           </VText>
@@ -99,6 +118,13 @@ const LoginScreen: React.FC = () => {
         <CustomButton
           title={t('login')}
           onPress={formik.handleSubmit as any}
+          loading={loading}
+          style={styles.loginButton}
+          textStyle={styles.loginButtonText}
+        />
+        <CustomButton
+          title={t('forceLogin')}
+          onPress={handleForceLogin}
           loading={loading}
           style={styles.loginButton}
           textStyle={styles.loginButtonText}

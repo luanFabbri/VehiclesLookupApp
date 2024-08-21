@@ -1,15 +1,17 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Vehicle} from '@interfaces/VehicleInterfaces';
 import styles from './VehicleInfo.styles';
 import VText from '@components/vtext/VText';
+import useGlobalStyles from '@utils/GlobalStyles.ts';
 
 interface VehicleInfoProps {
   vehicle: Vehicle;
 }
 
 const VehicleInfo: React.FC<VehicleInfoProps> = ({vehicle}) => {
+  const GlobalStyles = useGlobalStyles();
   return (
     <View style={styles.container}>
       <Image source={{uri: vehicle.pictureLink}} style={styles.image} />
@@ -19,7 +21,11 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({vehicle}) => {
             <VText style={styles.model}>{vehicle.model}</VText>
           </View>
           <View style={styles.detailColumn}>
-            <MaterialCommunityIcons name="counter" size={24} color="black" />
+            <MaterialCommunityIcons
+              name="counter"
+              size={24}
+              color={GlobalStyles.commonTextMedium.color}
+            />
             <VText style={styles.detailText}>{vehicle.odometerKm} km</VText>
           </View>
         </View>
@@ -30,7 +36,11 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({vehicle}) => {
             </VText>
           </View>
           <View style={styles.detailColumn}>
-            <MaterialCommunityIcons name="fuel" size={24} color="black" />
+            <MaterialCommunityIcons
+              name="fuel"
+              size={24}
+              color={GlobalStyles.commonTextMedium.color}
+            />
             <VText style={styles.detailText}>{vehicle.fuelLevel}%</VText>
           </View>
         </View>

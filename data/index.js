@@ -50,30 +50,32 @@ server.post('/login', (request, response) => {
     response.status(200).json({
       id_token: accessToken,
     });
-  }
-  const caseId = getRandomInt(3);
+    return;
+  } else {
+    const caseId = getRandomInt(3);
 
-  switch (caseId) {
-    case 1:
-      response.status(500).json({message: 'Internal server error'});
-      break;
-    case 2:
-      setTimeout(() => response.status(504).json(), 20_000);
-      break;
-    case 3:
-      if (
-        request.body.email === 'test@test.com.br' &&
-        request.body.password === '12345'
-      ) {
-        response.status(200).json({
-          id_token: accessToken,
-        });
-      } else {
-        response.status(401).json({message: 'Usuário ou senha inválidos'});
-      }
-      break;
-    default:
-      response.status(500);
+    switch (caseId) {
+      case 0:
+        response.status(500).json({message: 'Internal server error'});
+        break;
+      case 1:
+        setTimeout(() => response.status(504).json(), 20_000);
+        break;
+      case 2:
+        if (
+          request.body.email === 'test@test.com.br' &&
+          request.body.password === '12345'
+        ) {
+          response.status(200).json({
+            id_token: accessToken,
+          });
+        } else {
+          response.status(401).json({message: 'Usuário ou senha inválidos'});
+        }
+        break;
+      default:
+        response.status(500);
+    }
   }
 });
 

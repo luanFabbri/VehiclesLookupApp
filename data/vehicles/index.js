@@ -1,4 +1,4 @@
-const { faker } = require("@faker-js/faker");
+const {faker} = require('@faker-js/faker');
 const path = require('path');
 
 function createVehicle() {
@@ -10,10 +10,10 @@ function createVehicle() {
     model: `${faker.vehicle.manufacturer()} ${faker.vehicle.model()}`,
     latitude: faker.location.latitude(),
     longitude: faker.location.longitude(),
-    pictureLink: path.join(__dirname, '../images/car-picture.png'),
+    pictureLink: 'https://i.postimg.cc/sXPYCxzV/car-picture.png',
   };
 }
 
-const vehicles = faker.helpers.multiple(createVehicle, { count: 100 });
+const vehicles = faker.helpers.multiple(createVehicle, {count: 100});
 
 module.exports = vehicles;

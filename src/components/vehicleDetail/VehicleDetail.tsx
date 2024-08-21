@@ -5,6 +5,7 @@ import {format} from 'date-fns';
 import styles from './VehicleDetail.styles.ts';
 import {VehicleHistory} from '../../interfaces/VehicleInterfaces.ts';
 import VText from '@components/vtext/VText.tsx';
+import useGlobalStyles from '@utils/GlobalStyles.ts';
 
 interface VehicleDetailProps {
   history: VehicleHistory;
@@ -13,6 +14,7 @@ interface VehicleDetailProps {
 const VehicleDetail: React.FC<VehicleDetailProps> = ({history}) => {
   const {timestamp, fuelLevel, latitude, longitude} = history;
   const formattedDate = format(new Date(timestamp), 'dd/MM HH:mm:ss');
+  const GlobalStyles = useGlobalStyles();
 
   const handlePressLocation = () => {
     const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
@@ -23,15 +25,19 @@ const VehicleDetail: React.FC<VehicleDetailProps> = ({history}) => {
     <View style={styles.historyItem}>
       <VText style={styles.historyTextDate}>{formattedDate}</VText>
       <VText style={styles.historyFuel}>{fuelLevel}%</VText>
-      <VText
-        style={styles.historyTextPosition}>{`${latitude},${longitude}`}</VText>
-      <MaterialCommunityIcons
-        style={{fontSize: 18, paddingLeft: 5, color: 'grey'}}
-        name="open-in-new"
-        size={24}
-        color="black"
-        onPress={handlePressLocation}
-      />
+      <View style={{flexDirection: 'row'}}>
+        <VText style={styles.historyTextPosition}>
+          {`${latitude},${longitude}`}
+        </VText>
+        <MaterialCommunityIcons
+          style={{
+            fontSize: 16,
+            color: GlobalStyles.commonTextMedium.color,
+          }}
+          name="open-in-new"
+          onPress={handlePressLocation}
+        />
+      </View>
     </View>
   );
 };

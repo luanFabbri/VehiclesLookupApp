@@ -1,6 +1,6 @@
 import React from 'react';
 import MapView, {Marker, Callout} from 'react-native-maps';
-import {View, Image} from 'react-native';
+import {View, Image, Text} from 'react-native';
 import {Vehicle} from '@interfaces/VehicleInterfaces';
 import styles from './CustomMapView.styles';
 import VText from '@components/vtext/VText';
@@ -35,15 +35,25 @@ const CustomMapView: React.FC<CustomMapViewProps> = ({
           <Callout
             onPress={() => onMarkerPress(vehicle)}
             style={styles.callout}>
-            <View style={styles.calloutContent}>
-              <Image
-                resizeMode="cover"
-                style={styles.calloutImage}
-                source={{uri: vehicle.pictureLink}}
-              />
-              <VText>{vehicle.model}</VText>
-              <VText>Placa: {vehicle.licensePlate}</VText>
-            </View>
+            <VText style={{color: '#000000'}}>Chassis: {vehicle.chassis}</VText>
+            <VText style={{color: '#000000'}}>Fuel: {vehicle.fuelLevel}</VText>
+            <VText style={{color: '#000000'}}>Model: {vehicle.model}</VText>
+            <VText style={{color: '#000000'}}>
+              Odometer: {vehicle.odometerKm}
+            </VText>
+            <VText
+              style={{
+                color: '#000000',
+                padding: 8,
+                borderWidth: 1,
+                width: '100%',
+                borderRadius: 4,
+                textAlign: 'center',
+                marginTop: 6,
+                backgroundColor: 'lightgrey',
+              }}>
+              Ver detalhes
+            </VText>
           </Callout>
         </Marker>
       ))}
