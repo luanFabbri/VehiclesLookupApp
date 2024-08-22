@@ -1,20 +1,26 @@
 import React from 'react';
-import {View, Linking} from 'react-native';
+import {View, Linking, FlatList, Text} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {format} from 'date-fns';
-import styles from './VehicleDetail.styles.ts';
-import {VehicleHistory} from '../../interfaces/VehicleInterfaces.ts';
-import VText from '@components/vtext/VText.tsx';
-import useGlobalStyles from '@utils/GlobalStyles.ts';
+import styles from './VehicleDetail.styles';
+import {VehicleHistory} from '@interfaces/VehicleInterfaces';
+import VText from '@components/vtext/VText';
+import useGlobalStyles from '@utils/GlobalStyles';
+import {useTranslation} from 'react-i18next';
 
 interface VehicleDetailProps {
-  history: VehicleHistory;
+  history: VehicleHistory[];
 }
 
-const VehicleDetail: React.FC<VehicleDetailProps> = ({history}) => {
-  const {timestamp, fuelLevel, latitude, longitude} = history;
+interface VehicleDetailItemProps {
+  item: VehicleHistory;
+}
+
+const VehicleDetailItem: React.FC<VehicleDetailItemProps> = ({item}) => {
+  console.log(item);
+  const {timestamp, fuelLevel, latitude, longitude} = item;
   const formattedDate = format(new Date(timestamp), 'dd/MM HH:mm:ss');
-  const GlobalStyles = useGlobalStyles();
+  const globalStyles = useGlobalStyles();
 
   const handlePressLocation = () => {
     const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
@@ -22,22 +28,39 @@ const VehicleDetail: React.FC<VehicleDetailProps> = ({history}) => {
   };
 
   return (
-    <View style={styles.historyItem}>
-      <VText style={styles.historyTextDate}>{formattedDate}</VText>
-      <VText style={styles.historyFuel}>{fuelLevel}%</VText>
-      <View style={{flexDirection: 'row'}}>
-        <VText style={styles.historyTextPosition}>
-          {`${latitude},${longitude}`}
-        </VText>
+    <View style={styles.row}>
+      <VText style={styles.cellLeft}>{formattedDate}</VText>
+      <VText style={styles.cellMiddle}>{fuelLevel}%</VText>
+      <View style={styles.positionCell}>
+        <VText style={styles.cellRight}>{`${latitude},${longitude}`}</VText>
         <MaterialCommunityIcons
           style={{
             fontSize: 16,
-            color: GlobalStyles.commonTextMedium.color,
+            color: globalStyles.commonTextMedium.color,
           }}
           name="open-in-new"
           onPress={handlePressLocation}
         />
       </View>
+    </View>
+  );
+};
+
+const VehicleDetail: React.FC<VehicleDetailProps> = ({history}) => {
+  const {t} = useTranslation();
+
+  return (
+    <View>
+      <View style={styles.header}>
+        <VText style={styles.headerCellLeft}>{t('dateTime')}</VText>
+        <VText style={styles.headerCellMiddle}>{t('fuel')}</VText>
+        <VText style={styles.headerCellRight}>{t('position')}</VText>
+      </View>
+      <FlatList
+        data={history}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item}) => <VehicleDetailItem item={item} />}
+      />
     </View>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TextInput} from 'react-native';
+import {View, TextInput, TextStyle} from 'react-native';
 import styles from './CustomInput.styles';
 import VText from '@components/vtext/VText';
 import useGlobalStyles from '@utils/GlobalStyles';
@@ -12,6 +12,7 @@ interface CustomInputProps {
   error?: string;
   secureTextEntry?: boolean;
   keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad';
+  customStyle?: TextStyle;
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -22,12 +23,15 @@ const CustomInput: React.FC<CustomInputProps> = ({
   error,
   secureTextEntry,
   keyboardType,
+  customStyle,
 }) => {
   const globalStyles = useGlobalStyles();
   return (
     <View style={styles.container}>
       <TextInput
+        testID="custom-input"
         style={[
+          customStyle || null,
           globalStyles.commonTextMedium,
           styles.input,
           error ? styles.inputError : null,

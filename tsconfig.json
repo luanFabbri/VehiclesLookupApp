@@ -11,6 +11,22 @@
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
       "@screens/*": ["screens/*"]
-    }
-  }
+    },
+    "jsx": "react", // Garante suporte ao JSX
+    "esModuleInterop": true, // Suporte à importação de módulos ES
+    "allowSyntheticDefaultImports": true, // Permite importações padrão
+    "strict": true, // Ativa verificações rigorosas
+    "skipLibCheck": true, // Ignora verificação de tipos em arquivos de definição de biblioteca
+    "forceConsistentCasingInFileNames": true, // Força diferenciação de maiúsculas/minúsculas nos nomes de arquivos
+    "isolatedModules": true, // Garante que cada arquivo seja tratado como um módulo separado
+    "resolveJsonModule": true, // Permite a importação de arquivos JSON
+    "noEmit": true // Impede a emissão de arquivos JavaScript
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"], // Inclui arquivos TypeScript e TSX
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js"
+  ] // Exclui arquivos desnecessários
 }

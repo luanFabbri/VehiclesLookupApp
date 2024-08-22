@@ -5,7 +5,7 @@ import {I18nextProvider} from 'react-i18next';
 import AppNavigator from './src/navigation';
 import i18n from './src/services/i18n/i18n';
 import store from './src/services/redux/store';
-import {loadSettings} from '@services/redux/slices/settingsSlice';
+import {loadSettings} from './src/services/redux/slices/settingsSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import './src/services/i18n/i18n';
 

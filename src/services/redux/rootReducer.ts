@@ -1,8 +1,11 @@
-// src/store/rootReducer.ts
+// src/services/redux/rootReducer.ts
 import {combineReducers} from '@reduxjs/toolkit';
+import settingsReducer from './slices/settingsSlice'; // Exemplo de slice
+import authReducer from './slices/authSlice'; // Exemplo de slice
 
 const rootReducer = combineReducers({
-  // seus reducers aqui
+  settings: settingsReducer,
+  auth: authReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

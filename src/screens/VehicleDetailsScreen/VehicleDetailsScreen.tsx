@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, FlatList, Alert} from 'react-native';
+import {View, Alert} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {useTranslation} from 'react-i18next';
@@ -10,12 +10,12 @@ import {Vehicle, VehicleHistory} from '@interfaces/VehicleInterfaces';
 import VehicleDetail from '@components/vehicleDetail/VehicleDetail';
 import {RootState} from '@services/redux/store';
 import {NavigationProps} from '@navigation/index';
-import VehicleInfo from '@components/vehicleInfo/VehicleInfo';
 import VText from '@components/vtext/VText';
 
 // Estilos
 import styles from './VehicleDetailsScreen.styles';
 import useGlobalStyles from '@utils/GlobalStyles';
+import VehicleInfo from '@components/vehicleInfo/VehicleInfo';
 
 const VehicleDetailsScreen: React.FC = () => {
   const globalStyles = useGlobalStyles();
@@ -32,7 +32,6 @@ const VehicleDetailsScreen: React.FC = () => {
       if (!token) {
         Alert.alert(t('error'), t('tokenNotFoundError'));
         navigation.navigate('Login');
-
         return;
       }
 
@@ -52,17 +51,7 @@ const VehicleDetailsScreen: React.FC = () => {
       <VText style={styles.title}>{t('details')}</VText>
       <VehicleInfo vehicle={vehicle} />
       <VText style={styles.historyTitle}>{t('history')}</VText>
-      <View style={styles.historyHeader}>
-        <VText style={styles.historyHeaderText}>{t('dateTime')}</VText>
-        <VText style={styles.historyHeaderText}>{t('fuel')}</VText>
-        <VText style={styles.historyHeaderText}>{t('position')}</VText>
-      </View>
-      <FlatList
-        data={history}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({item}) => <VehicleDetail history={item} />}
-        style={styles.historyList}
-      />
+      <VehicleDetail history={history} />
     </View>
   );
 };
