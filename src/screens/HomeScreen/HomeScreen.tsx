@@ -63,16 +63,18 @@ const HomeScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} testID={'home-safearea'}>
       <View style={styles.header}>
         <Image
           source={require('../../../assets/images/logo.png')}
           style={styles.logo}
+          testID="home-logo"
         />
-        <Pressable onPress={handlePressAvatar}>
+        <Pressable onPress={handlePressAvatar} testID="home-pressable">
           <UserAvatar
             uri={`https://ui-avatars.com/api/?name=${userName}&background=random`}
             size="small"
+            customTestId="home-user-avatar"
           />
         </Pressable>
       </View>
@@ -81,6 +83,7 @@ const HomeScreen: React.FC = () => {
           vehicles={vehicles}
           onMarkerPress={handleMarkerPress}
           initialRegion={initialRegion}
+          customTestId="home-mapview"
         />
       )}
     </SafeAreaView>

@@ -7,6 +7,7 @@ interface VTextProps {
   children: React.ReactNode;
   style?: TextStyle;
   onPress?: () => void;
+  customTestID?: string;
 }
 
 const VText: React.FC<VTextProps> = ({
@@ -14,6 +15,7 @@ const VText: React.FC<VTextProps> = ({
   children,
   style,
   onPress,
+  customTestID,
 }) => {
   const globalStyles = useGlobalStyles();
   const getTextStyle = () => {
@@ -31,7 +33,7 @@ const VText: React.FC<VTextProps> = ({
     <Text
       style={[getTextStyle(), style]}
       onPress={onPress}
-      testID="custom-text">
+      testID={customTestID ? customTestID : 'custom-text'}>
       {children}
     </Text>
   );

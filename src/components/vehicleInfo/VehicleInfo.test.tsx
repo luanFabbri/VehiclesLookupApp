@@ -3,7 +3,6 @@ import {render} from '@testing-library/react-native';
 import VehicleInfo from '../vehicleInfo/VehicleInfo';
 import {Vehicle} from '@interfaces/VehicleInterfaces';
 import useGlobalStyles from '@utils/GlobalStyles.ts';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 

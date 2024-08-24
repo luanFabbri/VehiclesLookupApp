@@ -14,15 +14,22 @@ const AboutScreen: React.FC = () => {
 
   return (
     <View style={globalStyles.container}>
-      <ScrollView>
+      <ScrollView testID="about-scrollview">
         <View style={styles.container}>
-          <VText style={styles.appName}>VehicleLookupApp</VText>
-          <VText style={{fontSize: 16, lineHeight: 24}}>
+          <VText style={styles.appName} customTestID="about-appname">
+            VehicleLookupApp
+          </VText>
+          <VText
+            style={{fontSize: 16, lineHeight: 24}}
+            customTestID="about-desc-1">
             {t('aboutScreenDescriptionPt1')}
           </VText>
-          <VText style={{fontSize: 16, lineHeight: 24, marginTop: 20}}>
+          <VText
+            style={{fontSize: 16, lineHeight: 24, marginTop: 20}}
+            customTestID="about-thanks">
             {t('aboutScreenThanks')}
             <VText
+              customTestID="about-linkedin"
               style={{color: 'blue'}}
               onPress={() =>
                 Linking.openURL('https://www.linkedin.com/in/lpffabbri/')
@@ -31,7 +38,9 @@ const AboutScreen: React.FC = () => {
             </VText>
             .
           </VText>
-          <VText style={{fontSize: 16, lineHeight: 24, marginTop: 20}}>
+          <VText
+            style={{fontSize: 16, lineHeight: 24, marginTop: 20}}
+            customTestID="about-desc-2">
             {t('aboutScreenDescriptionPt2')}
           </VText>
         </View>

@@ -13,9 +13,13 @@ import VText from '@components/vtext/VText';
 const ConfigScreen: React.FC = () => {
   const globalStyles = useGlobalStyles();
   return (
-    <SafeAreaView style={[globalStyles.container, styles.container]}>
+    <SafeAreaView
+      style={[globalStyles.container, styles.container]}
+      testID="config-safearea">
       <View style={styles.headerText}>
-        <VText size="big">Configurações</VText>
+        <VText size="big" customTestID="config-header">
+          Configurações
+        </VText>
       </View>
       <View>
         <DarkModeToggle />

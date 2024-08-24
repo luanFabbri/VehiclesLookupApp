@@ -14,15 +14,20 @@ interface CustomMapViewProps {
     latitudeDelta: number;
     longitudeDelta: number;
   };
+  customTestId?: string;
 }
 
 const CustomMapView: React.FC<CustomMapViewProps> = ({
   vehicles,
   onMarkerPress,
   initialRegion,
+  customTestId,
 }) => {
   return (
-    <MapView style={styles.map} initialRegion={initialRegion}>
+    <MapView
+      style={styles.map}
+      initialRegion={initialRegion}
+      testID={customTestId ? customTestId : 'mapView'}>
       {vehicles.map((vehicle, index) => (
         <Marker
           key={index}
