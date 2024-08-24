@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Picker} from '@react-native-picker/picker';
 import styles from './LanguagePicker.styles';
-import {View} from 'react-native';
+import {Alert, View} from 'react-native';
 import i18n from '@services/i18n/i18n';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
@@ -17,14 +17,16 @@ const LanguagePicker: React.FC = ({}) => {
       i18n.changeLanguage(language);
       dispatch(loadSettings({language}));
       await AsyncStorage.setItem('@language', language);
-    } catch (error) {
-      console.error('Failed to save language setting', error);
+    } catch (e) {
+      console.log('error: ', e);
+      Alert.alert('Failed to save language setting');
     }
   };
 
   return (
     <View style={styles.container}>
       <Picker
+        testID="language-picker"
         style={styles.pickerMain}
         selectedValue={selectedLanguage}
         onValueChange={itemValue => handleLanguageChange(itemValue)}>

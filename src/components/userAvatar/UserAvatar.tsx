@@ -9,7 +9,7 @@ interface UserAvatarProps {
 const UserAvatar: React.FC<UserAvatarProps> = ({uri, size}) => {
   const styles = size === 'big' ? bigStyles : smallStyles;
 
-  return <Image source={{uri}} style={styles.avatar} />;
+  return <Image source={{uri}} style={styles.avatar} testID="user-avatar" />;
 };
 
 const smallStyles = StyleSheet.create({

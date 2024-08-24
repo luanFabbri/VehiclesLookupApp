@@ -18,7 +18,7 @@ const DarkModeToggle: React.FC = ({}) => {
       try {
         const storedDarkMode = await AsyncStorage.getItem('@darkMode');
 
-        if (storedDarkMode !== null) {
+        if (storedDarkMode !== null && storedDarkMode !== undefined) {
           setIsDarkMode(JSON.parse(storedDarkMode));
         }
       } catch (error) {

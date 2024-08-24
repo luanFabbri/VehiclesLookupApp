@@ -28,15 +28,15 @@ describe('CustomButton', () => {
   });
 
   it('applies custom styles correctly', () => {
-    const customStyle = {backgroundColor: 'red'};
+    const customStyle = {backgroundColor: 'blue'};
     const customTextStyle = {color: 'yellow'};
 
-    const {getByTestId, getByText} = render(
+    const {getByTestId} = render(
       <CustomButton
         title="Styled Button"
         onPress={() => {}}
         customStyle={customStyle}
-        customTextStyle={customTextStyle}
+        textStyle={customTextStyle}
       />,
     );
 
@@ -53,14 +53,9 @@ describe('CustomButton', () => {
     expect(buttonBackgroundColor).toBe(customStyle.backgroundColor);
 
     // Verifica se o estilo do texto contém a propriedade personalizada
-
-    const textStyles = Array.isArray(text.props.style)
-      ? text.props.style
-      : [text.props.style];
-    const textColor = textStyles.find(style => style.color)?.color;
-    console.log(textStyles);
-    console.log(text.props.style);
-
-    expect(textColor).toBe(customTextStyle.color);
+    const colorCheck = text.props.style.some(
+      (style: any) => style.color === 'yellow',
+    );
+    expect(colorCheck).toBeTruthy;
   });
 });

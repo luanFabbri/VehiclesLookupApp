@@ -17,7 +17,6 @@ interface VehicleDetailItemProps {
 }
 
 const VehicleDetailItem: React.FC<VehicleDetailItemProps> = ({item}) => {
-  console.log(item);
   const {timestamp, fuelLevel, latitude, longitude} = item;
   const formattedDate = format(new Date(timestamp), 'dd/MM HH:mm:ss');
   const globalStyles = useGlobalStyles();
@@ -34,6 +33,7 @@ const VehicleDetailItem: React.FC<VehicleDetailItemProps> = ({item}) => {
       <View style={styles.positionCell}>
         <VText style={styles.cellRight}>{`${latitude},${longitude}`}</VText>
         <MaterialCommunityIcons
+          testID="location-icon"
           style={{
             fontSize: 16,
             color: globalStyles.commonTextMedium.color,

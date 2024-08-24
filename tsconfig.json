@@ -1,16 +1,17 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
-      "@services/*": ["services/*"],
-      "@api/*": ["services/API/*"],
-      "@i18n/*": ["services/i18n/*"],
-      "@navigation/*": ["navigation/*"],
-      "@interfaces/*": ["interfaces/*"],
-      "@components/*": ["components/*"],
-      "@utils/*": ["utils/*"],
-      "@screens/*": ["screens/*"]
+      "@env": ["./env.d.ts"],
+      "@services/*": ["./src/services/*"],
+      "@api/*": ["./src/services/API/*"],
+      "@i18n/*": ["./src/services/i18n/*"],
+      "@navigation/*": ["./src/navigation/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@components/*": ["./src/components/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@screens/*": ["./src/screens/*"]
     },
     "jsx": "react", // Garante suporte ao JSX
     "esModuleInterop": true, // Suporte à importação de módulos ES

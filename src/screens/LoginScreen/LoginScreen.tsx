@@ -119,14 +119,14 @@ const LoginScreen: React.FC = () => {
           title={t('login')}
           onPress={formik.handleSubmit as any}
           loading={loading}
-          style={styles.loginButton}
+          customStyle={styles.loginButton}
           textStyle={styles.loginButtonText}
         />
         <CustomButton
           title={t('forceLogin')}
           onPress={handleForceLogin}
           loading={loading}
-          style={styles.loginButton}
+          customStyle={styles.loginButton}
           textStyle={styles.loginButtonText}
         />
       </View>
@@ -134,7 +134,7 @@ const LoginScreen: React.FC = () => {
       <CustomButton
         title={t('aboutThisApp')}
         onPress={() => navigation.navigate('About')}
-        style={styles.aboutButton}
+        customStyle={styles.aboutButton}
         textStyle={GlobalStyles.aboutButtonText}
       />
     </SafeAreaView>

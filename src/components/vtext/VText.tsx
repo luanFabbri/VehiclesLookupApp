@@ -1,6 +1,6 @@
 import useGlobalStyles from '@utils/GlobalStyles';
 import React from 'react';
-import {StyleSheet, Text, TextStyle} from 'react-native';
+import {Text, TextStyle} from 'react-native';
 
 interface VTextProps {
   size?: 'small' | 'medium' | 'big';
@@ -28,7 +28,10 @@ const VText: React.FC<VTextProps> = ({
   };
 
   return (
-    <Text style={[getTextStyle(), style]} onPress={onPress}>
+    <Text
+      style={[getTextStyle(), style]}
+      onPress={onPress}
+      testID="custom-text">
       {children}
     </Text>
   );

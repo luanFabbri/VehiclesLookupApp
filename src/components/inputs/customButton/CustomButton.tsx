@@ -13,27 +13,25 @@ interface CustomButtonProps {
   onPress: () => void;
   loading?: boolean;
   customStyle?: ViewStyle;
-  customTextStyle?: TextStyle;
+  textStyle?: TextStyle;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
   title,
   onPress,
   loading,
-  customTextStyle,
   customStyle,
+  textStyle,
 }) => (
   <TouchableOpacity
-    style={[customStyle || null, styles.button]}
+    style={[styles.button, customStyle]}
     onPress={onPress}
     disabled={loading}
     testID="custom-button">
     {loading ? (
       <ActivityIndicator size="small" color="#fff" testID="loading-indicator" />
     ) : (
-      <Text
-        style={[customTextStyle || null, styles.buttonText]}
-        testID="custom-button-text">
+      <Text style={[styles.buttonText, textStyle]} testID="custom-button-text">
         {title}
       </Text>
     )}

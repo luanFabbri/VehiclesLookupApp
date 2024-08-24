@@ -42,9 +42,11 @@ const SplashScreen: React.FC = () => {
             }),
           );
         } else {
-          Alert.alert(
-            i18n.t('error'),
-            profileResult.message || i18n.t('unknownError'),
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{name: 'Login'}],
+            }),
           );
         }
       } else {

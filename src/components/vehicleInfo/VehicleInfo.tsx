@@ -14,7 +14,11 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({vehicle}) => {
   const GlobalStyles = useGlobalStyles();
   return (
     <View style={styles.container}>
-      <Image source={{uri: vehicle.pictureLink}} style={styles.image} />
+      <Image
+        source={{uri: vehicle.pictureLink}}
+        style={styles.image}
+        testID="vehicle-image"
+      />
       <View style={styles.detailsContainer}>
         <View style={styles.detailRow}>
           <View style={styles.detailColumn}>
@@ -22,6 +26,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({vehicle}) => {
           </View>
           <View style={styles.detailColumn}>
             <MaterialCommunityIcons
+              testID="counter-icon"
               name="counter"
               size={24}
               color={GlobalStyles.commonTextMedium.color}
@@ -37,6 +42,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({vehicle}) => {
           </View>
           <View style={styles.detailColumn}>
             <MaterialCommunityIcons
+              testID="fuel-icon"
               name="fuel"
               size={24}
               color={GlobalStyles.commonTextMedium.color}
