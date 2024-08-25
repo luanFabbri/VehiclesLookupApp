@@ -48,10 +48,10 @@ const VehicleDetailsScreen: React.FC = () => {
 
   return (
     <View style={[globalStyles.container, styles.container]}>
-      <VText style={styles.title}>{t('details')}</VText>
-      <VehicleInfo vehicle={vehicle} />
-      <VText style={styles.historyTitle}>{t('history')}</VText>
-      <VehicleDetail history={history} />
+      <VText style={styles.title} customTestID='vehicle-details-header'>{t('details')}</VText>
+      <VehicleInfo vehicle={vehicle} customTestID='Vehicle-info'/>
+      <VText style={styles.historyTitle} customTestID='vehicle-details-history-header'>{t('history')}</VText>
+      <VehicleDetail history={history} customTestID='vehicle-detail'/>
     </View>
   );
 };

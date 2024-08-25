@@ -63,12 +63,13 @@ const SplashScreen: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} testID='splash-safearea'>
       <View style={styles.logoContainer}>
         <Image
           source={require('../../../assets/images/logo.png')}
           style={styles.logo}
           resizeMode="contain"
+          testID='splash-image'
         />
       </View>
     </SafeAreaView>

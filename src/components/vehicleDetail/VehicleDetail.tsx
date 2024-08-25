@@ -1,23 +1,24 @@
 import React from 'react';
-import {View, Linking, FlatList, Text} from 'react-native';
+import { View, Linking, FlatList, Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 import styles from './VehicleDetail.styles';
-import {VehicleHistory} from '@interfaces/VehicleInterfaces';
+import { VehicleHistory } from '@interfaces/VehicleInterfaces';
 import VText from '@components/vtext/VText';
 import useGlobalStyles from '@utils/GlobalStyles';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 interface VehicleDetailProps {
   history: VehicleHistory[];
+  customTestID?: string;
 }
 
 interface VehicleDetailItemProps {
   item: VehicleHistory;
 }
 
-const VehicleDetailItem: React.FC<VehicleDetailItemProps> = ({item}) => {
-  const {timestamp, fuelLevel, latitude, longitude} = item;
+const VehicleDetailItem: React.FC<VehicleDetailItemProps> = ({ item }) => {
+  const { timestamp, fuelLevel, latitude, longitude } = item;
   const formattedDate = format(new Date(timestamp), 'dd/MM HH:mm:ss');
   const globalStyles = useGlobalStyles();
 
@@ -46,11 +47,11 @@ const VehicleDetailItem: React.FC<VehicleDetailItemProps> = ({item}) => {
   );
 };
 
-const VehicleDetail: React.FC<VehicleDetailProps> = ({history}) => {
-  const {t} = useTranslation();
+const VehicleDetail: React.FC<VehicleDetailProps> = ({ history, customTestID }) => {
+  const { t } = useTranslation();
 
   return (
-    <View>
+    <View testID={customTestID?customTestID:'vehicle-detail'}>
       <View style={styles.header}>
         <VText style={styles.headerCellLeft}>{t('dateTime')}</VText>
         <VText style={styles.headerCellMiddle}>{t('fuel')}</VText>
@@ -59,7 +60,7 @@ const VehicleDetail: React.FC<VehicleDetailProps> = ({history}) => {
       <FlatList
         data={history}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({item}) => <VehicleDetailItem item={item} />}
+        renderItem={({ item }) => <VehicleDetailItem item={item} />}
       />
     </View>
   );

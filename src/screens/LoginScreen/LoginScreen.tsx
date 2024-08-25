@@ -80,20 +80,22 @@ const LoginScreen: React.FC = () => {
   });
 
   return (
-    <SafeAreaView style={[GlobalStyles.container, styles.container]}>
+    <SafeAreaView style={[GlobalStyles.container, styles.container]} testID="login-safearea">
       <TouchableOpacity
         style={styles.iconContainer}
-        onPress={() => navigation.navigate('Config')}>
+        onPress={() => navigation.navigate('Config')}
+        testID="login-cog-pressable">
         <MaterialCommunityIcons
           name="cog"
           size={24}
+          testID="login-cog-icon"
           color={GlobalStyles.commonTextMedium.color}
         />
       </TouchableOpacity>
 
       <View style={styles.innerContainer}>
         <View style={{position: 'relative'}}>
-          <VText style={styles.appName}>Vehicle Lookup App</VText>
+          <VText style={styles.appName} customTestID="login-appname">Vehicle Lookup App</VText>
           <VText size="small" style={styles.appSubtitle}>
             {t('createdBy')}
           </VText>
@@ -104,6 +106,7 @@ const LoginScreen: React.FC = () => {
           value={formik.values.email}
           onChangeText={formik.handleChange('email')}
           onBlur={() => formik.handleBlur('email')}
+          customTestID='login-email-input'
           error={formik.touched.email ? formik.errors.email : undefined}
           keyboardType="email-address"
         />
@@ -112,6 +115,7 @@ const LoginScreen: React.FC = () => {
           value={formik.values.password}
           onChangeText={formik.handleChange('password')}
           onBlur={() => formik.handleBlur('password')}
+          customTestID='login-password-input'
           error={formik.touched.password ? formik.errors.password : undefined}
           secureTextEntry
         />
@@ -121,6 +125,7 @@ const LoginScreen: React.FC = () => {
           loading={loading}
           customStyle={styles.loginButton}
           textStyle={styles.loginButtonText}
+          customTestID="login-login-button"
         />
         <CustomButton
           title={t('forceLogin')}
@@ -128,6 +133,7 @@ const LoginScreen: React.FC = () => {
           loading={loading}
           customStyle={styles.loginButton}
           textStyle={styles.loginButtonText}
+          customTestID="login-forceLogin-button"
         />
       </View>
 
@@ -136,6 +142,7 @@ const LoginScreen: React.FC = () => {
         onPress={() => navigation.navigate('About')}
         customStyle={styles.aboutButton}
         textStyle={GlobalStyles.aboutButtonText}
+          customTestID="login-about-button"
       />
     </SafeAreaView>
   );

@@ -17,6 +17,7 @@ import styles from './ProfileScreen.styles';
 import useGlobalStyles from '@utils/GlobalStyles';
 import CustomButton from '@components/inputs/customButton/CustomButton';
 import {NavigationProps} from '@navigation/index';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ProfileScreen: React.FC = () => {
   const globalStyles = useGlobalStyles();
@@ -43,13 +44,14 @@ const ProfileScreen: React.FC = () => {
   };
 
   return (
-    <View style={[globalStyles.container, styles.container]}>
-      <VText style={styles.title}>{t('profile')}</VText>
+    <SafeAreaView style={[globalStyles.container, styles.container]} testID='profile-safearea'>
+      <VText style={styles.title} customTestID='profile-header'>{t('profile')}</VText>
       <View style={styles.profileData}>
-        <VText style={styles.userName}>{toTitleCase(userName || '')}</VText>
+        <VText style={styles.userName} customTestID='profile-username'>{toTitleCase(userName || '')}</VText>
         <UserAvatar
           uri={`https://ui-avatars.com/api/?name=${userName}&background=random`}
           size="big"
+          customTestId='profile-user-avatar'
         />
       </View>
       <View style={styles.profileOptionsView}>
@@ -59,6 +61,7 @@ const ProfileScreen: React.FC = () => {
             onPress={handleConfigPress}
             style={styles.pofileButton}
             textStyle={styles.profileButtonText}
+            customTestID='profile-goto-config'
           />
         </View>
         <View>
@@ -67,10 +70,11 @@ const ProfileScreen: React.FC = () => {
             onPress={handleLogoutPress}
             style={styles.pofileButton}
             textStyle={styles.profileButtonText}
+            customTestID='profile-logout'
           />
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

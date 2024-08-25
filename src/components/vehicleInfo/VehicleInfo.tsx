@@ -1,21 +1,22 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import { View, Text, Image } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Vehicle} from '@interfaces/VehicleInterfaces';
+import { Vehicle } from '@interfaces/VehicleInterfaces';
 import styles from './VehicleInfo.styles';
 import VText from '@components/vtext/VText';
 import useGlobalStyles from '@utils/GlobalStyles.ts';
 
 interface VehicleInfoProps {
   vehicle: Vehicle;
+  customTestID?: string;
 }
 
-const VehicleInfo: React.FC<VehicleInfoProps> = ({vehicle}) => {
+const VehicleInfo: React.FC<VehicleInfoProps> = ({ vehicle, customTestID }) => {
   const GlobalStyles = useGlobalStyles();
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={customTestID ? customTestID : 'vehicle-info-main'}>
       <Image
-        source={{uri: vehicle.pictureLink}}
+        source={{ uri: vehicle.pictureLink }}
         style={styles.image}
         testID="vehicle-image"
       />
