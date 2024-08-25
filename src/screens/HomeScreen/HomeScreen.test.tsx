@@ -51,7 +51,7 @@ describe('HomeScreen', () => {
     const navigate = jest.fn();
     (useNavigation as jest.Mock).mockReturnValue({navigate});
 
-    const {getByTestId, queryByTestId} = render(
+    const {getByTestId, queryByTestId, findByTestId} = render(
       <Provider store={store}>
         <HomeScreen />
       </Provider>,
@@ -64,9 +64,7 @@ describe('HomeScreen', () => {
     expect(getByTestId('home-logo')).toBeTruthy();
 
     // Verifica se o avatar do usuário está presente
-    await act(async () => {
-      expect(queryByTestId('home-user-avatar')).toBeTruthy();
-    });
+    expect(await findByTestId('home-user-avatar')).toBeTruthy();
 
     // Espera a chamada da API e verifica se o CustomMapView foi renderizado
     await waitFor(() => {
@@ -74,7 +72,7 @@ describe('HomeScreen', () => {
     });
   });
 
-  it('navigates to Profile screen when the avatar is pressed', () => {
+  it('navigates to Profile screen when the avatar is pressed', async () => {
     const navigate = jest.fn();
     (useNavigation as jest.Mock).mockReturnValue({navigate});
 
@@ -87,7 +85,9 @@ describe('HomeScreen', () => {
     fireEvent.press(getByTestId('home-pressable'));
 
     // Verifica se a navegação foi chamada com o destino correto
-    expect(navigate).toHaveBeenCalledWith('Profile');
+    await waitFor(() => {
+      expect(navigate).toHaveBeenCalledWith('Profile');
+    });
   });
 
   it('navigates to Login screen if token is missing', () => {
