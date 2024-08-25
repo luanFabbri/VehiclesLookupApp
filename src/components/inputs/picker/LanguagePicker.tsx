@@ -1,25 +1,31 @@
-import React, {useState} from 'react';
-import {Picker} from '@react-native-picker/picker';
-import styles from './LanguagePicker.styles';
-import {Alert, View} from 'react-native';
-import i18n from '@services/i18n/i18n';
+import React, { useState } from 'react';
+import { Alert, View } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useDispatch} from 'react-redux';
-import {loadSettings} from '@services/redux/slices/settingsSlice';
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
-const LanguagePicker: React.FC = ({}) => {
+import i18n from '@services/i18n/i18n';
+import { loadSettings } from '@services/redux/slices/settingsSlice';
+
+// estilos
+import styles from './LanguagePicker.styles';
+
+
+const LanguagePicker: React.FC = ({ }) => {
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleLanguageChange = async (language: string) => {
     try {
       setSelectedLanguage(language);
       i18n.changeLanguage(language);
-      dispatch(loadSettings({language}));
+      dispatch(loadSettings({ language }));
       await AsyncStorage.setItem('@language', language);
     } catch (e) {
       console.log('error: ', e);
-      Alert.alert('Failed to save language setting');
+      Alert.alert(t("languagepicker-error-save"));
     }
   };
 

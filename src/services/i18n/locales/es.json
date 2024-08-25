@@ -29,7 +29,8 @@
       "aboutScreenDescriptionPt1": "VehicleLookupApp es una aplicación creada por Luan Fabbri. Tiene como objetivo servir como portafolio y ejemplificar las siguientes capacidades:\n\n- Capacidades de inicio de sesión - Formularios, bibliotecas como Yup y Formik, manejo de sesiones (inicio de sesión y cierre de sesión).\n- Componentización de una aplicación.\n- React-Navigation.\n- Consumo de API (Axios).\n- Backend básico.\n- Uso de Redux.\n- Uso de i18n.\n- Uso de la API de Geolocalización de Google e implementación de GoogleMaps.\n- Diseño con Flexbox.\n- Estructura de carpetas.\n- Git (control de versiones, ramas, etc).\n- Fuentes (instalación y gestión).\n- Modo claro/oscuro.",
       "aboutScreenThanks": "¡Gracias por tu interés en leer hasta aquí! Si deseas conversar conmigo sobre unirte a tu equipo de desarrollo, mi LinkedIn es ",
       "aboutScreenDescriptionPt2": "Actualmente, la aplicación está en la versión v1.2, y la versión v1.3 tiene algunas nuevas funcionalidades planificadas:\n\n- Skeletons.\n- Inicio de sesión automático con token.\n- Aún más componentización.\n- Ejemplo de notificaciones internas y externas.\n- Firebase y la posibilidad de iniciar sesión con Google/Facebook.",
-      "createdBy": "Creado por Luan Fabbri"
+      "createdBy": "Creado por Luan Fabbri",
+      "config-header": "Configuraciones"
     }
   }
   
