@@ -4,7 +4,6 @@ import {View, ScrollView, Linking} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import VText from '@components/vtext/VText';
 
-// Estilos
 import styles from './AboutScreen.styles';
 import useGlobalStyles from '@utils/GlobalStyles';
 

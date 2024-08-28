@@ -14,17 +14,18 @@ describe('CustomInput', () => {
   const defaultProps = {
     placeholder: 'Enter text',
     value: '',
+    customTestID: 'mock-input',
     onChangeText: jest.fn(),
     onBlur: jest.fn(),
   };
 
   it('renders correctly', () => {
-    const {getByPlaceholderText} = render(
+    const {getByTestId} = render(
       <Provider store={store}>
         <CustomInput {...defaultProps} />
       </Provider>,
     );
-    const input = getByPlaceholderText('Enter text');
+    const input = getByTestId('mock-input');
     expect(input).toBeTruthy();
   });
 
@@ -62,7 +63,7 @@ describe('CustomInput', () => {
         <CustomInput {...errorProps} />
       </Provider>,
     );
-    const input = getByTestId('custom-input');
+    const input = getByTestId('mock-input');
 
     // Nota: Verifica se o estilo contém a borda vermelha
     expect(input.props.style).toContainEqual({borderColor: 'red'});
@@ -94,7 +95,7 @@ describe('CustomInput', () => {
         <CustomInput {...customProps} />
       </Provider>,
     );
-    const input = getByTestId('custom-input');
+    const input = getByTestId('mock-input');
 
     // Nota: Verifica se o estilo personalizado foi aplicado
     expect(input.props.style).toContainEqual(customStyle);

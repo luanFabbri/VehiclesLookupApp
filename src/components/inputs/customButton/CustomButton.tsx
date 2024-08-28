@@ -6,6 +6,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+
 import styles from './CustomButton.styles';
 
 interface CustomButtonProps {
@@ -23,13 +24,13 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   loading,
   customStyle,
   textStyle,
-  customTestID
+  customTestID,
 }) => (
   <TouchableOpacity
     style={[styles.button, customStyle]}
     onPress={onPress}
     disabled={loading}
-    testID={customTestID ? customTestID : "custom-button"}>
+    testID={customTestID ? customTestID : 'custom-button'}>
     {loading ? (
       <ActivityIndicator size="small" color="#fff" testID="loading-indicator" />
     ) : (
