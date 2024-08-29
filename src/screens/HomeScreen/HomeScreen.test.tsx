@@ -1,87 +1,115 @@
 import React from 'react';
-import {render, fireEvent, waitFor} from '@testing-library/react-native';
-import {Provider, useDispatch} from 'react-redux';
+import {render, waitFor, act, fireEvent} from '@testing-library/react-native';
+import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
-import LoginScreen from '@screens/LoginScreen/LoginScreen';
-import {setToken, setProfile} from '@services/redux/slices/authSlice';
+import HomeScreen from './HomeScreen';
+import {fetchVehicles} from '@api/api-config';
+import {useNavigation} from '@react-navigation/native';
+import {View} from 'react-native';
 
 // Mock do Redux store
 const mockStore = configureStore([]);
 const store = mockStore({
   auth: {
-    token: null,
-    profile: {},
-  },
-  settings: {
-    darkMode: false,
+    token: 'dummy-token',
+    profile: {
+      name: 'John Doe',
+    },
   },
 });
 
 // Mock das funções e módulos
-jest.mock('react-redux', () => ({
-  useDispatch: jest.fn(),
-  useSelector: jest.fn(fn =>
-    fn({
-      settings: {darkMode: false},
-    }),
-  ),
+jest.mock('@api/api-config', () => ({
+  fetchVehicles: jest.fn(),
 }));
 
-jest.mock('@redux/actions', () => ({
-  setToken: jest.fn(),
-  setProfile: jest.fn(),
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: jest.fn(),
 }));
 
-describe('LoginScreen', () => {
-  let mockDispatch: jest.Mock;
+jest.mock('@components/userAvatar/UserAvatar', () =>
+  jest.fn(() => <View testID="home-user-avatar" />),
+);
 
+jest.mock('@components/map/customMapView/CustomMapView', () =>
+  jest.fn(() => <View testID="home-mapview" />),
+);
+
+describe('HomeScreen', () => {
   beforeEach(() => {
-    mockDispatch = jest.fn();
-    (useDispatch as unknown as jest.Mock).mockReturnValue(mockDispatch);
+    (fetchVehicles as jest.Mock).mockResolvedValue([
+      {
+        id: '1',
+        latitude: 37.78825,
+        longitude: -122.4324,
+        // outros campos necessários
+      },
+    ]);
   });
 
-  it('renders correctly', () => {
-    const {getByTestId} = render(
+  it('renders correctly and displays the correct components', async () => {
+    const navigate = jest.fn();
+    (useNavigation as jest.Mock).mockReturnValue({navigate});
+
+    const {getByTestId, queryByTestId, findByTestId} = render(
       <Provider store={store}>
-        <LoginScreen />
+        <HomeScreen />
       </Provider>,
     );
 
-    expect(getByTestId('login-login-button')).toBeTruthy();
-  });
+    // Verifica se o SafeAreaView está presente
+    expect(getByTestId('home-safearea')).toBeTruthy();
 
-  it('handles email and password input correctly', () => {
-    const {getByTestId} = render(
-      <Provider store={store}>
-        <LoginScreen />
-      </Provider>,
-    );
+    // Verifica se o logo está presente
+    expect(getByTestId('home-logo')).toBeTruthy();
 
-    fireEvent.changeText(getByTestId('login-email-input'), 'test@example.com');
-    fireEvent.changeText(getByTestId('login-password-input'), 'password123');
+    // Verifica se o avatar do usuário está presente
+    expect(await findByTestId('home-user-avatar')).toBeTruthy();
 
-    expect(getByTestId('login-email-input').props.value).toBe(
-      'test@example.com',
-    );
-    expect(getByTestId('login-password-input').props.value).toBe('password123');
-  });
-
-  it('handles login button press', async () => {
-    const {getByTestId} = render(
-      <Provider store={store}>
-        <LoginScreen />
-      </Provider>,
-    );
-
-    fireEvent.changeText(getByTestId('login-email-input'), 'test@example.com');
-    fireEvent.changeText(getByTestId('login-password-input'), 'password123');
-    fireEvent.press(getByTestId('login-login-button'));
-
+    // Espera a chamada da API e verifica se o CustomMapView foi renderizado
     await waitFor(() => {
-      expect(mockDispatch).toHaveBeenCalledWith(setToken('fake-token'));
-      expect(mockDispatch).toHaveBeenCalledWith(
-        setProfile({email: 'test@example.com', name: 'John Doe'}),
-      );
+      expect(queryByTestId('home-mapview')).toBeTruthy();
     });
+  });
+
+  it('navigates to Profile screen when the avatar is pressed', async () => {
+    const navigate = jest.fn();
+    (useNavigation as jest.Mock).mockReturnValue({navigate});
+
+    const {getByTestId} = render(
+      <Provider store={store}>
+        <HomeScreen />
+      </Provider>,
+    );
+
+    fireEvent.press(getByTestId('home-pressable'));
+
+    // Verifica se a navegação foi chamada com o destino correto
+    await waitFor(() => {
+      expect(navigate).toHaveBeenCalledWith('Profile');
+    });
+  });
+
+  it('navigates to Login screen if token is missing', () => {
+    const navigate = jest.fn();
+    (useNavigation as jest.Mock).mockReturnValue({navigate});
+
+    const emptyStore = mockStore({
+      auth: {
+        token: null,
+        profile: {
+          name: 'John Doe',
+        },
+      },
+    });
+
+    render(
+      <Provider store={emptyStore}>
+        <HomeScreen />
+      </Provider>,
+    );
+
+    // Verifica se a navegação para a tela de login foi chamada
+    expect(navigate).toHaveBeenCalledWith('Login');
   });
 });

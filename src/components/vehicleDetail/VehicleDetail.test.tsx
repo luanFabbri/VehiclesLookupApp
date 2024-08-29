@@ -34,9 +34,9 @@ describe('VehicleDetail', () => {
       </Provider>,
     );
 
-    expect(getByText('Date/Time')).toBeTruthy();
-    expect(getByText('Fuel')).toBeTruthy();
-    expect(getByText('Position')).toBeTruthy();
+    expect(getByText('Data/Hora')).toBeTruthy();
+    expect(getByText('Combustível')).toBeTruthy();
+    expect(getByText('Posição')).toBeTruthy();
   });
 
   it('renders the vehicle history items correctly', () => {
